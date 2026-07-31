@@ -199,75 +199,84 @@ export function FeaturedWork() {
       {/* Case Study Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-lg">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-lg">
+            {/* Outer Rounded Container clipped strictly with rounded-3xl overflow-hidden */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl p-6 sm:p-8 rounded-3xl bg-zinc-950 border border-white/15 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-2xl rounded-3xl bg-zinc-950 border border-white/15 shadow-2xl overflow-hidden my-auto max-h-[85vh] flex flex-col"
             >
+              {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 p-2 rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute top-5 right-5 z-30 p-2 rounded-full bg-white/10 text-zinc-300 hover:text-white hover:bg-white/20 transition-colors"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="mb-6">
-                <span className="px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono">
-                  {selectedProject.tag}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-3">
-                  {selectedProject.title}
-                </h3>
-                <p className="text-xs font-mono text-zinc-500 mt-1">Client: {selectedProject.client}</p>
-              </div>
-
-              {/* Key Metric Banner */}
-              <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-between mb-8">
-                <div>
-                  <span className="text-xs text-sky-300 font-medium block">Key Impact Metric</span>
-                  <span className="text-2xl font-extrabold text-white">{selectedProject.metric}</span>
-                </div>
-                <TrendingUp className="w-8 h-8 text-sky-400" />
-              </div>
-
-              {/* Challenge & Solution Grid */}
-              <div className="space-y-6 mb-8 text-sm">
-                <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
-                    The Challenge
-                  </h4>
-                  <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
-                    {selectedProject.challenge}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
-                    The MotionVox Solution
-                  </h4>
-                  <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
-                    {selectedProject.solution}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
-                    Business Outcome
-                  </h4>
-                  <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
-                    {selectedProject.outcome}
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="w-full py-3.5 rounded-full ice-glow-button font-semibold text-xs text-center"
+              {/* Inner Scrollable Container with data-lenis-prevent and internal right padding for scrollbar */}
+              <div
+                data-lenis-prevent="true"
+                className="w-full h-full overflow-y-auto p-6 sm:p-8 pr-5 sm:pr-7 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb:hover]:bg-sky-400"
               >
-                Close Breakdown
-              </button>
+                <div className="mb-6 pr-6">
+                  <span className="px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono">
+                    {selectedProject.tag}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-3">
+                    {selectedProject.title}
+                  </h3>
+                  <p className="text-xs font-mono text-zinc-500 mt-1">Client: {selectedProject.client}</p>
+                </div>
+
+                {/* Key Metric Banner */}
+                <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-between mb-8">
+                  <div>
+                    <span className="text-xs text-sky-300 font-medium block">Key Impact Metric</span>
+                    <span className="text-2xl font-extrabold text-white">{selectedProject.metric}</span>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-sky-400" />
+                </div>
+
+                {/* Challenge & Solution Grid */}
+                <div className="space-y-6 mb-8 text-sm">
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
+                      The Challenge
+                    </h4>
+                    <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
+                      {selectedProject.challenge}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
+                      The MotionVox Solution
+                    </h4>
+                    <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
+                      {selectedProject.solution}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2 font-semibold">
+                      Business Outcome
+                    </h4>
+                    <p className="text-zinc-300 leading-relaxed p-4 rounded-xl bg-white/5 border border-white/5">
+                      {selectedProject.outcome}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-full py-3.5 rounded-full ice-glow-button font-semibold text-xs text-center cursor-pointer"
+                >
+                  Close Breakdown
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

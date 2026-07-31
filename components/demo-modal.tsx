@@ -38,18 +38,23 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-lg rounded-3xl bg-zinc-950 border border-white/15 p-6 sm:p-8 shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden"
+            className="relative w-full max-w-lg rounded-3xl bg-zinc-950 border border-white/15 shadow-2xl overflow-hidden my-auto max-h-[85vh] flex flex-col"
           >
-            {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-
+            {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 p-2 rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-5 right-5 z-30 p-2 rounded-full bg-white/10 text-zinc-300 hover:text-white hover:bg-white/20 transition-colors"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
+
+            <div
+              data-lenis-prevent="true"
+              className="w-full h-full overflow-y-auto p-6 sm:p-8 pr-5 sm:pr-7 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb:hover]:bg-sky-400"
+            >
+              {/* Ambient Background Glow */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
             {step === "form" ? (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -178,6 +183,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                 </button>
               </div>
             )}
+            </div>
           </motion.div>
         </div>
       )}

@@ -244,15 +244,21 @@ export function Services() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-xl p-6 sm:p-8 rounded-3xl bg-zinc-950 border border-white/15 shadow-2xl overflow-hidden"
+              className="relative w-full max-w-xl rounded-3xl bg-zinc-950 border border-white/15 shadow-2xl overflow-hidden my-auto max-h-[85vh] flex flex-col"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedService(null)}
-                className="absolute top-5 right-5 p-2 rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute top-5 right-5 z-30 p-2 rounded-full bg-white/10 text-zinc-300 hover:text-white hover:bg-white/20 transition-colors"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
+
+              <div
+                data-lenis-prevent="true"
+                className="w-full h-full overflow-y-auto p-6 sm:p-8 pr-5 sm:pr-7 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb:hover]:bg-sky-400"
+              >
 
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-400/30 text-sky-400">
@@ -306,9 +312,10 @@ export function Services() {
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
-            </motion.div>
-          </div>
-        )}
+            </div>
+          </motion.div>
+        </div>
+      )}
       </AnimatePresence>
     </section>
   );
