@@ -197,23 +197,22 @@ export function Hero({ onOpenDemo }: HeroProps) {
       {/* 1. MAIN HERO OVERLAY TEXT (Visible before scroll shrink) */}
       <div
         ref={textContainerRef}
-        className="absolute z-30 max-w-5xl px-4 pt-20 sm:pt-24 md:pt-28 text-center flex flex-col items-center pointer-events-none"
+        className="absolute z-40 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-24 sm:pt-28 md:pt-32 text-left flex flex-col items-start pointer-events-none"
       >
-        
-
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.05] mb-6 max-w-5xl text-center drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.05] mb-6 max-w-4xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
           Refined Media Solutions, <br className="hidden sm:inline" />
           <span className="text-silver-gradient">Crafted with Expertise.</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-zinc-200 max-w-2xl font-normal leading-relaxed mb-8 text-balance drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+        <p className="text-lg sm:text-xl text-zinc-200 max-w-2xl font-normal leading-relaxed mb-8 text-left drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
           MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pointer-events-auto">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 w-full sm:w-auto pointer-events-auto relative z-50">
           <button
+            type="button"
             onClick={onOpenDemo}
-            className="w-full sm:w-auto ice-glow-button px-8 py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 group cursor-pointer shadow-[0_0_40px_rgba(56,189,248,0.5)]"
+            className="w-full sm:w-auto ice-glow-button px-8 py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 group cursor-pointer shadow-[0_0_40px_rgba(56,189,248,0.5)] relative z-50 pointer-events-auto"
           >
             <span>Book a Demo</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -221,7 +220,14 @@ export function Hero({ onOpenDemo }: HeroProps) {
 
           <a
             href="#services"
-            className="w-full sm:w-auto glass-button px-8 py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-zinc-100 hover:text-white transition-all backdrop-blur-md"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("services");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="w-full sm:w-auto glass-button px-8 py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-zinc-100 hover:text-white transition-all backdrop-blur-md relative z-50 pointer-events-auto cursor-pointer"
           >
             <span>Explore Services</span>
           </a>
