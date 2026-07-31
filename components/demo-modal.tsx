@@ -1,0 +1,186 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Calendar, Clock, Sparkles, CheckCircle2, User, Mail, Building2 } from "lucide-react";
+
+interface DemoModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function DemoModal({ isOpen, onClose }: DemoModalProps) {
+  const [step, setStep] = useState<"form" | "success">("form");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    date: "2026-08-05",
+    time: "10:00 AM EST",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep("success");
+  };
+
+  const handleReset = () => {
+    setStep("form");
+    onClose();
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-full max-w-lg rounded-3xl bg-zinc-950 border border-white/15 p-6 sm:p-8 shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden"
+          >
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <button
+              onClick={onClose}
+              className="absolute top-5 right-5 p-2 rounded-full bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {step === "form" ? (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono w-fit">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>VIP Live Session</span>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white">Book a Live Product Demo</h3>
+                  <p className="text-xs text-zinc-400 mt-1">
+                    Experience custom neural dubbing, AI avatars, and media automation built live for your brand.
+                  </p>
+                </div>
+
+                <div className="space-y-4 pt-2">
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                      Your Name *
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-zinc-500 absolute left-3.5 top-3.5" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-sky-400 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                      Work Email *
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-3.5" />
+                      <input
+                        type="email"
+                        required
+                        placeholder="john@company.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-sky-400 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                      Company Name
+                    </label>
+                    <div className="relative">
+                      <Building2 className="w-4 h-4 text-zinc-500 absolute left-3.5 top-3.5" />
+                      <input
+                        type="text"
+                        placeholder="Acme Studios"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-600 focus:outline-none focus:border-sky-400 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                        Preferred Date
+                      </label>
+                      <div className="relative">
+                        <Calendar className="w-4 h-4 text-zinc-500 absolute left-3.5 top-3.5" />
+                        <input
+                          type="date"
+                          value={formData.date}
+                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                          className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-sky-400 text-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
+                        Time Slot
+                      </label>
+                      <div className="relative">
+                        <Clock className="w-4 h-4 text-zinc-500 absolute left-3.5 top-3.5" />
+                        <select
+                          value={formData.time}
+                          onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                          className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white focus:outline-none focus:border-sky-400 text-xs"
+                        >
+                          <option value="10:00 AM EST">10:00 AM EST</option>
+                          <option value="02:00 PM EST">02:00 PM EST</option>
+                          <option value="06:00 PM IST">06:00 PM IST</option>
+                          <option value="09:00 PM IST">09:00 PM IST</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-full ice-glow-button font-semibold text-xs text-center flex items-center justify-center gap-2 cursor-pointer mt-4"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Confirm Demo Booking</span>
+                </button>
+              </form>
+            ) : (
+              <div className="py-10 text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-sky-500/20 border border-sky-400 text-sky-400 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">Demo Confirmed!</h3>
+                <p className="text-xs text-zinc-300 max-w-sm mx-auto leading-relaxed">
+                  We have scheduled your 1-on-1 session for <span className="text-sky-300 font-semibold">{formData.date} at {formData.time}</span>. Calendar invite and Google Meet link have been sent to <span className="text-white font-semibold">{formData.email}</span>.
+                </p>
+                <button
+                  onClick={handleReset}
+                  className="mt-6 px-6 py-2.5 rounded-full ice-glow-button text-xs font-semibold text-white"
+                >
+                  Done
+                </button>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
