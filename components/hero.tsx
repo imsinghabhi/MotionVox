@@ -197,25 +197,9 @@ export function Hero({ onOpenDemo }: HeroProps) {
       {/* 1. MAIN HERO OVERLAY TEXT (Visible before scroll shrink) */}
       <div
         ref={textContainerRef}
-        className="absolute z-30 max-w-5xl px-4 text-center flex flex-col items-center pointer-events-none"
+        className="absolute z-30 max-w-5xl px-4 pt-20 sm:pt-24 md:pt-28 text-center flex flex-col items-center pointer-events-none"
       >
-        <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-panel border border-white/20 mb-6 shadow-[0_0_35px_rgba(56,189,248,0.3)]">
-          <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 border border-white/30">
-            <Image
-              src="/IMG_3249.PNG"
-              alt="MotionVox Emblem"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <span className="text-xs font-extrabold uppercase tracking-widest text-white">
-            Motion<span className="text-sky-400">Vox</span> Studio
-          </span>
-          <span className="h-3.5 w-[1px] bg-white/20" />
-          <span className="text-xs text-sky-400 font-semibold flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" /> Dubbing & AI Avatars
-          </span>
-        </div>
+        
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.05] mb-6 max-w-5xl text-center drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
           Refined Media Solutions, <br className="hidden sm:inline" />

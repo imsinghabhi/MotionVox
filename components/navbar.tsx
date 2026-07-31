@@ -50,7 +50,14 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         }`}
       >
         {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex items-center gap-3 group cursor-pointer"
+        >
           <div className="relative w-8 h-8 rounded-full border border-white/20 group-hover:border-sky-400/70 transition-colors overflow-hidden shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
             <Image
               src="/IMG_3249.PNG"
@@ -87,7 +94,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenDemo}
-            className="relative group overflow-hidden rounded-full p-[1px] font-medium text-xs focus:outline-none"
+            className="hidden sm:inline-flex relative group overflow-hidden rounded-full p-[1px] font-medium text-xs focus:outline-none"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-600 rounded-full animate-pulse-glow opacity-80 group-hover:opacity-100 transition-opacity" />
             <span className="relative flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/90 text-white group-hover:bg-black/70 transition-colors">
