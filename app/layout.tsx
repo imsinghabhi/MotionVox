@@ -77,9 +77,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${montserrat.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-sky-500 selection:text-black bg-noise">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-sky-500 selection:text-black bg-noise"
+      >
         <SEOSchema />
         <SmoothScrollProvider>
           <MouseSpotlight />

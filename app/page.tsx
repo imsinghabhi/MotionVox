@@ -33,20 +33,20 @@ export default function Home() {
       {/* 2. Hero Section */}
       <Hero onOpenDemo={handleOpenDemo} />
 
-      {/* 3. Trusted By Marquee */}
-      <TrustedBy />
-
-      {/* 4. Services Grid & Specs Modal */}
+      {/* 3. Services Grid & Specs Modal */}
       <Services />
 
-      {/* 5. Why MotionVox Storytelling */}
+      {/* 4. Why MotionVox Storytelling */}
       <WhyUs />
 
-      {/* 6. Featured Work Showcase */}
+      {/* 5. Featured Work Showcase */}
       <FeaturedWork />
 
-      {/* 7. Process Timeline */}
+      {/* 6. Process Timeline */}
       <Process />
+
+      {/* 7. Trusted By Marquee */}
+      <TrustedBy />
 
       {/* 8. Client Testimonials */}
       <Testimonials />

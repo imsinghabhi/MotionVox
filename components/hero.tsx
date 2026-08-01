@@ -134,14 +134,16 @@ export function Hero({ onOpenDemo }: HeroProps) {
         0
       );
 
-      // 2. Fade out subtitle & CTA buttons as hero shrinks
+      // 2. Dissolve hero overlay text like fog as user scrolls downward
       tl.to(
         textContainerRef.current,
         {
           opacity: 0,
-          y: -30,
-          ease: "power2.inOut",
-          duration: 0.6,
+          filter: "blur(28px)",
+          scale: 1.08,
+          y: -80,
+          ease: "power2.out",
+          duration: 0.5,
         },
         0
       );
