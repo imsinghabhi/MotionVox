@@ -1,25 +1,9 @@
-import fs from "fs";
-import path from "path";
 import { createClient } from "@supabase/supabase-js";
 import { BlogPost, BlogPostInput } from "@/types/blog";
-
-const blogsFilePath = path.join(process.cwd(), "data", "blogs.json");
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yhlgkzxbizoxbjxnqvin.supabase.co";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_SZCZgcG3edN1p6wzTrIzJA_Cq8YWYiV";
 const supabase = createClient(supabaseUrl, supabaseKey);
-
-let memoryStore: BlogPost[] | null = null;
-
-function ensureDataFile(): void {
-  const dirPath = path.dirname(blogsFilePath);
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-  if (!fs.existsSync(blogsFilePath)) {
-    fs.writeFileSync(blogsFilePath, JSON.stringify([], null, 2), "utf-8");
-  }
-}
 
 function mapFromSupabase(row: any): BlogPost {
   let authorObj = row.author;
@@ -67,48 +51,6 @@ function mapToSupabase(post: BlogPost): any {
   };
 }
 
-export async function getAllPosts(includeDrafts = false): Promise<BlogPost[]> {
-  try {
-    const { data, error } = await supabase
-      .from("blogs")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (!error && Array.isArray(data) && data.length > 0) {
-      const posts = data.map(mapFromSupabase);
-      memoryStore = posts;
-      return includeDrafts ? posts : posts.filter((p) => p.isPublished);
-    }
-  } catch (err) {
-    console.warn("Supabase fetch failed, using local file fallback:", err);
-  }
-
-  // Fallback to local JSON file
-  try {
-    ensureDataFile();
-    const fileData = fs.readFileSync(blogsFilePath, "utf-8");
-    const posts: BlogPost[] = JSON.parse(fileData || "[]");
-    memoryStore = posts;
-    return includeDrafts ? posts : posts.filter((p) => p.isPublished);
-  } catch (error) {
-    console.error("Error reading blogs file:", error);
-    if (memoryStore) {
-      return includeDrafts ? memoryStore : memoryStore.filter((p) => p.isPublished);
-    }
-    return [];
-  }
-}
-
-export async function getPostBySlug(slug: string, includeDrafts = false): Promise<BlogPost | null> {
-  const posts = await getAllPosts(includeDrafts);
-  return posts.find((p) => p.slug === slug) || null;
-}
-
-export async function getPostById(id: string): Promise<BlogPost | null> {
-  const posts = await getAllPosts(true);
-  return posts.find((p) => p.id === id) || null;
-}
-
 export function slugify(text: string): string {
   return text
     .toString()
@@ -121,13 +63,53 @@ export function slugify(text: string): string {
     .replace(/-+$/, "");
 }
 
-export function savePosts(posts: BlogPost[]): void {
-  memoryStore = posts;
+export async function getAllPosts(includeDrafts = false): Promise<BlogPost[]> {
   try {
-    ensureDataFile();
-    fs.writeFileSync(blogsFilePath, JSON.stringify(posts, null, 2), "utf-8");
-  } catch (error) {
-    console.error("Failed writing posts to file, updated memory store:", error);
+    let query = supabase.from("blogs").select("*").order("created_at", { ascending: false });
+    
+    if (!includeDrafts) {
+      query = query.eq("is_published", true);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+      console.error("Error fetching posts from Supabase:", error);
+      return [];
+    }
+
+    return (data || []).map(mapFromSupabase);
+  } catch (err) {
+    console.error("Supabase query error:", err);
+    return [];
+  }
+}
+
+export async function getPostBySlug(slug: string, includeDrafts = false): Promise<BlogPost | null> {
+  try {
+    let query = supabase.from("blogs").select("*").eq("slug", slug);
+    if (!includeDrafts) {
+      query = query.eq("is_published", true);
+    }
+
+    const { data, error } = await query.single();
+    if (error || !data) return null;
+
+    return mapFromSupabase(data);
+  } catch (err) {
+    console.error("Supabase query error:", err);
+    return null;
+  }
+}
+
+export async function getPostById(id: string): Promise<BlogPost | null> {
+  try {
+    const { data, error } = await supabase.from("blogs").select("*").eq("id", id).single();
+    if (error || !data) return null;
+
+    return mapFromSupabase(data);
+  } catch (err) {
+    console.error("Supabase query error:", err);
+    return null;
   }
 }
 
@@ -153,27 +135,24 @@ export async function createPost(input: BlogPostInput): Promise<BlogPost> {
     readTime: input.readTime || `${Math.max(1, Math.ceil((input.content || "").split(" ").length / 200))} min read`,
   };
 
-  try {
-    const supabasePayload = mapToSupabase(newPost);
-    await supabase.from("blogs").insert([supabasePayload]);
-  } catch (err) {
-    console.warn("Supabase insert failed, saving locally:", err);
+  const payload = mapToSupabase(newPost);
+  const { error } = await supabase.from("blogs").insert([payload]);
+  
+  if (error) {
+    console.error("Supabase insert error:", error);
   }
 
-  posts.unshift(newPost);
-  savePosts(posts);
   return newPost;
 }
 
 export async function updatePost(id: string, input: Partial<BlogPostInput>): Promise<BlogPost | null> {
-  const posts = await getAllPosts(true);
-  const index = posts.findIndex((p) => p.id === id);
-  if (index === -1) return null;
+  const existing = await getPostById(id);
+  if (!existing) return null;
 
-  const existing = posts[index];
   let newSlug = existing.slug;
   if (input.slug && input.slug !== existing.slug) {
     newSlug = slugify(input.slug);
+    const posts = await getAllPosts(true);
     let counter = 1;
     while (posts.some((p) => p.slug === newSlug && p.id !== id)) {
       newSlug = `${slugify(input.slug)}-${counter}`;
@@ -190,29 +169,20 @@ export async function updatePost(id: string, input: Partial<BlogPostInput>): Pro
       : existing.readTime,
   };
 
-  try {
-    const supabasePayload = mapToSupabase(updated);
-    await supabase.from("blogs").update(supabasePayload).eq("id", id);
-  } catch (err) {
-    console.warn("Supabase update failed, updating locally:", err);
+  const payload = mapToSupabase(updated);
+  const { error } = await supabase.from("blogs").update(payload).eq("id", id);
+  if (error) {
+    console.error("Supabase update error:", error);
   }
 
-  posts[index] = updated;
-  savePosts(posts);
   return updated;
 }
 
 export async function deletePost(id: string): Promise<boolean> {
-  const posts = await getAllPosts(true);
-  const filtered = posts.filter((p) => p.id !== id);
-  if (filtered.length === posts.length) return false;
-
-  try {
-    await supabase.from("blogs").delete().eq("id", id);
-  } catch (err) {
-    console.warn("Supabase delete failed, deleting locally:", err);
+  const { error } = await supabase.from("blogs").delete().eq("id", id);
+  if (error) {
+    console.error("Supabase delete error:", error);
+    return false;
   }
-
-  savePosts(filtered);
   return true;
 }
