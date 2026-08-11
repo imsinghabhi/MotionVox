@@ -1,5 +1,25 @@
 [
   {
+    "title": "the future is motionvox",
+    "slug": "the-future-is-motionvox",
+    "excerpt": "",
+    "content": "the future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvoxthe future is motionvox",
+    "coverImage": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop",
+    "author": {
+      "name": "Abhishek Singh",
+      "role": "Founder & Creative Lead",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop"
+    },
+    "tags": [
+      "Neural Dubbing",
+      "AI Production"
+    ],
+    "isPublished": true,
+    "id": "post_1786482585399_5quyg",
+    "publishedAt": "2026-08-11",
+    "readTime": "1 min read"
+  },
+  {
     "title": "woww abhishek",
     "slug": "woww-abhishek",
     "excerpt": "",

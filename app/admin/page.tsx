@@ -22,6 +22,7 @@ import {
 export default function AdminDashboardPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "published" | "draft">("all");
   const [actionLoading, setActionLoading] = useState<string | null>(null);
@@ -32,12 +33,14 @@ export default function AdminDashboardPage() {
     try {
       const res = await fetch("/api/admin/posts");
       if (res.status === 401) {
+        setAuthorized(false);
         router.push("/admin/login");
         return;
       }
       const data = await res.json();
       if (Array.isArray(data)) {
         setPosts(data);
+        setAuthorized(true);
       }
     } catch (err) {
       console.error("Failed loading admin posts:", err);
@@ -103,6 +106,17 @@ export default function AdminDashboardPage() {
 
   const publishedCount = posts.filter((p) => p.isPublished).length;
   const draftCount = posts.filter((p) => !p.isPublished).length;
+
+  if (loading || !authorized) {
+    return (
+      <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center font-sans">
+        <div className="text-center space-y-3">
+          <div className="w-8 h-8 border-2 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs text-neutral-400 font-mono">Verifying admin session...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex flex-col font-sans">

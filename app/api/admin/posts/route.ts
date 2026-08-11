@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const posts = getAllPosts(true);
+  const posts = await getAllPosts(true);
   return NextResponse.json(posts);
 }
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Title and content are required" }, { status: 400 });
     }
 
-    const newPost = createPost(body);
+    const newPost = await createPost(body);
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
     console.error("Failed creating post:", error);

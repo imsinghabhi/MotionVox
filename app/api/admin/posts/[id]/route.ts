@@ -12,7 +12,7 @@ export async function GET(
   }
 
   const { id } = await params;
-  const post = getPostById(id);
+  const post = await getPostById(id);
 
   if (!post) {
     return NextResponse.json({ error: "Post not found" }, { status: 404 });
@@ -34,7 +34,7 @@ export async function PUT(
 
   try {
     const body = await request.json();
-    const updated = updatePost(id, body);
+    const updated = await updatePost(id, body);
 
     if (!updated) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
@@ -57,7 +57,7 @@ export async function DELETE(
   }
 
   const { id } = await params;
-  const success = deletePost(id);
+  const success = await deletePost(id);
 
   if (!success) {
     return NextResponse.json({ error: "Post not found" }, { status: 404 });
