@@ -7,10 +7,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 
 interface NavbarProps {
-  onOpenDemo: () => void;
+  onOpenDemo?: () => void;
 }
 
 export function Navbar({ onOpenDemo }: NavbarProps) {
+  const handleOpenDemo = () => {
+    if (onOpenDemo) {
+      onOpenDemo();
+    } else {
+      window.location.href = "/#contact";
+    }
+  };
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -27,12 +34,13 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Why Us", href: "#why-us" },
-    { name: "Work", href: "#featured-work" },
-    { name: "Process", href: "#process" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "FAQ", href: "#faq" },
+    { name: "Services", href: "/#services" },
+    { name: "Why Us", href: "/#why-us" },
+    { name: "Work", href: "/#featured-work" },
+    { name: "Process", href: "/#process" },
+    { name: "Blog", href: "/blog" },
+    { name: "Testimonials", href: "/#testimonials" },
+    { name: "FAQ", href: "/#faq" },
   ];
 
   return (
@@ -52,10 +60,6 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         {/* Brand / Logo */}
         <Link
           href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
           className="flex items-center gap-3 group cursor-pointer"
         >
           <div className="relative w-8 h-8 rounded-full border border-white/20 group-hover:border-sky-400/70 transition-colors overflow-hidden shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
@@ -69,7 +73,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           </div>
           <div className="flex flex-col">
             <span className="font-bold tracking-tight text-white text-lg leading-none group-hover:text-sky-300 transition-colors">
-              Motion<span className="text-sky-400">Vox</span>
+              Motion<span className="">Vox</span>
             </span>
             <span className="text-[9px] uppercase tracking-widest text-zinc-400 font-medium leading-none mt-1">
               Creative Studio
@@ -93,7 +97,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         {/* Action Button & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
           <button
-            onClick={onOpenDemo}
+            onClick={handleOpenDemo}
             className="hidden sm:inline-flex relative group overflow-hidden rounded-full p-[1px] font-medium text-xs focus:outline-none"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-600 rounded-full animate-pulse-glow opacity-80 group-hover:opacity-100 transition-opacity" />
@@ -141,7 +145,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenDemo();
+                  handleOpenDemo();
                 }}
                 className="w-full py-3.5 rounded-2xl bg-sky-500 hover:bg-sky-400 text-black font-semibold text-sm transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)]"
               >

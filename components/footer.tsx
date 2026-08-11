@@ -87,6 +87,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
+                <Link href="/blog" className="hover:text-white transition-colors text-sky-400 font-medium">
+                  Studio Journal (Blog)
+                </Link>
+              </li>
+              <li>
                 <a href="#why-us" className="hover:text-white transition-colors">
                   Why MotionVox
                 </a>
@@ -110,6 +115,11 @@ export function Footer() {
                 <a href="#contact" className="hover:text-white transition-colors">
                   Contact Studio
                 </a>
+              </li>
+              <li>
+                <Link href="/admin" className="hover:text-white transition-colors text-neutral-400 font-mono text-[10px]">
+                  Admin Console
+                </Link>
               </li>
             </ul>
           </div>
