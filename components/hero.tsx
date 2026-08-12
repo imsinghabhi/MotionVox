@@ -124,11 +124,12 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // ---------------------------------------------------------------------
       // PHASE 1 (0.00 -> 0.25): Hero Starts Shrinking
       // ---------------------------------------------------------------------
-      // 1a. Hero main text overlay dissolves out
+      // 1a. Hero main text overlay dissolves out cleanly with autoAlpha
       tl.to(
         textContainerRef.current,
         {
           opacity: 0,
+          autoAlpha: 0,
           y: -40,
           scale: 0.96,
           ease: "power1.inOut",
@@ -280,9 +281,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
         {/* 1. INITIAL HERO OVERLAY TEXT (Phase 1) */}
         <div
           ref={textContainerRef}
-          className={`absolute z-30 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] ${
-            isShrunk ? "pointer-events-none" : "pointer-events-auto"
-          }`}
+          className="absolute z-40 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] pointer-events-auto"
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
             Refined Media Solutions, <br className="hidden sm:inline" />
@@ -293,14 +292,12 @@ export function Hero({ onOpenDemo }: HeroProps) {
             MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-30">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-50 pointer-events-auto">
             <button
               type="button"
               onClick={() => {
-                if (isShrunk) return;
                 onOpenDemo();
               }}
-              disabled={isShrunk}
               className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg transition-all"
             >
               <span>Book a Demo</span>
@@ -311,7 +308,6 @@ export function Hero({ onOpenDemo }: HeroProps) {
               href="#services"
               onClick={(e) => {
                 e.preventDefault();
-                if (isShrunk) return;
                 const el = document.getElementById("services");
                 if (el) {
                   el.scrollIntoView({ behavior: "smooth" });
