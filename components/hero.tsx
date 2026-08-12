@@ -2,9 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import {
-  Sparkles,
   ArrowRight,
   Languages,
   Zap,
@@ -14,7 +12,6 @@ import {
   VolumeX,
   ChevronLeft,
   ChevronRight,
-  Play,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,11 +33,14 @@ export function Hero({ onOpenDemo }: HeroProps) {
   const [isShrunk, setIsShrunk] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   const videoMediaRef = useRef<HTMLVideoElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
-  const sideCardsRef = useRef<HTMLDivElement>(null);
+  const leftCardRef = useRef<HTMLDivElement>(null);
+  const rightCardRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const shrunkOverlayRef = useRef<HTMLDivElement>(null);
 
   const videoAsset = "/hero-video.mp4";
   const posterAsset = "/hero-poster.jpg";
@@ -85,12 +85,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
     { icon: ShieldCheck, label: "Neural AI Fidelity", value: "99.8%" },
   ];
 
-  const toggleMute = () => {
-    if (videoMediaRef.current) {
-      videoMediaRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
+  
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -99,16 +94,20 @@ export function Hero({ onOpenDemo }: HeroProps) {
 
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
+      // Master scroll-driven timeline pinned to the viewport
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom top",
-          scrub: 0.5,
+          end: "+=320%", // Generous scroll space for cinematic sequence
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.6,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (self.progress > 0.12) {
+            if (self.progress > 0.2) {
               setIsShrunk(true);
             } else {
               setIsShrunk(false);
@@ -117,65 +116,142 @@ export function Hero({ onOpenDemo }: HeroProps) {
         },
       });
 
-      // 1. Shrink the main video container from 100vw x 100vh to centered card
-      tl.to(
-        videoWrapperRef.current,
-        {
-          width: isMobile ? "92vw" : "68vw",
-          height: isMobile ? "50vh" : "62vh",
-          borderRadius: isMobile ? "24px" : "36px",
-          boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
-          borderWidth: "1px",
-          borderColor: "#34312B",
-          ease: "power2.inOut",
-          duration: 1,
-        },
-        0
-      );
+      // Target video card shrink dimensions based on device size
+      const targetWidth = isMobile ? "88vw" : isTablet ? "68vw" : "58vw";
+      const targetHeight = isMobile ? "40vh" : isTablet ? "50vh" : "54vh";
+      const sideCardXOffset = isMobile ? 40 : isTablet ? 80 : 120;
 
-      // 2. Dissolve hero overlay text efficiently as user scrolls downward
+      // ---------------------------------------------------------------------
+      // PHASE 1 (0.00 -> 0.25): Hero Starts Shrinking
+      // ---------------------------------------------------------------------
+      // 1a. Hero main text overlay dissolves out
       tl.to(
         textContainerRef.current,
         {
           opacity: 0,
-          autoAlpha: 0,
+          y: -40,
           scale: 0.96,
-          y: -50,
-          ease: "power1.out",
-          duration: 0.5,
+          ease: "power1.inOut",
+          duration: 0.25,
         },
         0
       );
 
-      // 3. Reveal horizontal carousel side cards sliding in from left & right
-      tl.fromTo(
-        sideCardsRef.current,
-        { opacity: 0, scale: 0.9 },
+      // 1b. Main hero video container scales down smoothly from 100vw/100vh to card dimensions
+      tl.to(
+        videoWrapperRef.current,
         {
-          opacity: 1,
-          scale: 1,
-          ease: "power2.out",
-          duration: 0.8,
+          width: targetWidth,
+          height: targetHeight,
+          borderRadius: isMobile ? "20px" : "32px",
+          boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
+          borderColor: "rgba(52, 49, 43, 1)",
+          ease: "power2.inOut",
+          duration: 0.50,
         },
-        0.4
+        0
       );
 
-      // 4. Reveal bottom statistics strip
+      // 1c. Inner card title overlay (for shrunk state) fades in on central video card
+      if (shrunkOverlayRef.current) {
+        tl.fromTo(
+          shrunkOverlayRef.current,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.25,
+          },
+          0.20
+        );
+      }
+
+      // ---------------------------------------------------------------------
+      // PHASE 2 (0.25 -> 0.55): Carousel Cards Reveal & Slide In
+      // ---------------------------------------------------------------------
+      // Left Card: PREVIOUS REEL
+      tl.fromTo(
+        leftCardRef.current,
+        {
+          opacity: 0,
+          x: -sideCardXOffset,
+          scale: 0.82,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          ease: "power2.out",
+          duration: 0.30,
+        },
+        0.25
+      );
+
+      // Right Card: NEXT REEL
+      tl.fromTo(
+        rightCardRef.current,
+        {
+          opacity: 0,
+          x: sideCardXOffset,
+          scale: 0.82,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          ease: "power2.out",
+          duration: 0.30,
+        },
+        0.25
+      );
+
+      // ---------------------------------------------------------------------
+      // PHASE 3 (0.55 -> 0.75): Carousel Completely Established & Visible
+      // ---------------------------------------------------------------------
+      // Between 0.55 and 0.75, the layout remains stable & fully established.
+      // (Scroll progress passes through 55% - 75% while hero remains pinned)
+
+      // ---------------------------------------------------------------------
+      // PHASE 4 (0.75 -> 0.90): Statistics Section Reveal
+      // ---------------------------------------------------------------------
       tl.fromTo(
         statsRef.current,
-        { opacity: 0, y: 40 },
+        {
+          opacity: 0,
+          y: 40,
+          scale: 0.95,
+        },
         {
           opacity: 1,
           y: 0,
+          scale: 1,
           ease: "power2.out",
-          duration: 0.6,
+          duration: 0.15,
         },
-        0.8
+        0.75
       );
+
+      // ---------------------------------------------------------------------
+      // PHASE 5 (0.90 -> 1.00): Exit Hero / Complete Sequence & Unpin
+      // ---------------------------------------------------------------------
+      // Hold completed state cleanly until 1.00 when ScrollTrigger unpins
+      tl.to({}, { duration: 0.10 }, 0.90);
     }, containerRef);
 
-    return () => ctx.revert();
+    // Refresh ScrollTrigger after DOM renders fully
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
   }, []);
+
+  const prevIndex = (activeReelIndex - 1 + reels.length) % reels.length;
+  const nextIndex = (activeReelIndex + 1) % reels.length;
 
   const handleNextReel = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -190,183 +266,214 @@ export function Hero({ onOpenDemo }: HeroProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-[#11100E] flex flex-col items-center justify-center will-change-transform"
+      className="relative w-full bg-[#11100E] z-10"
+      style={{ height: "100vh" }}
     >
-      {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none z-0 transform-gpu" />
-
-      {/* 1. MAIN HERO OVERLAY TEXT (Visible before scroll shrink) */}
+      {/* Viewport container fixed/pinned during scroll */}
       <div
-        ref={textContainerRef}
-        className="absolute z-20 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start pointer-events-none will-change-[transform,opacity]"
+        ref={viewportRef}
+        className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#11100E] transform-gpu"
       >
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
-          Refined Media Solutions, <br className="hidden sm:inline" />
-          <span className="text-silver-gradient">Crafted with Expertise.</span>
-        </h1>
+        {/* Background Radial Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none z-0 transform-gpu" />
 
-        <p className="text-sm sm:text-base md:text-lg text-[#A8A39A] max-w-xl font-normal leading-relaxed mb-6 text-left drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-          MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
-        </p>
-
+        {/* 1. INITIAL HERO OVERLAY TEXT (Phase 1) */}
         <div
-          className={`flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-20 ${
-            isShrunk ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
-          } transition-opacity duration-300`}
+          ref={textContainerRef}
+          className={`absolute z-30 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] ${
+            isShrunk ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
-          <button
-            type="button"
-            onClick={(e) => {
-              if (isShrunk) return;
-              onOpenDemo();
-            }}
-            disabled={isShrunk}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg transition-all"
-          >
-            <span>Book a Demo</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+            Refined Media Solutions, <br className="hidden sm:inline" />
+            <span className="text-silver-gradient">Crafted with Expertise.</span>
+          </h1>
 
-          <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              if (isShrunk) return;
-              const el = document.getElementById("services");
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B] bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-all cursor-pointer"
-          >
-            <span>Explore Services</span>
-          </a>
+          <p className="text-sm sm:text-base md:text-lg text-[#A8A39A] max-w-xl font-normal leading-relaxed mb-6 text-left drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-30">
+            <button
+              type="button"
+              onClick={() => {
+                if (isShrunk) return;
+                onOpenDemo();
+              }}
+              disabled={isShrunk}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg transition-all"
+            >
+              <span>Book a Demo</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <a
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                if (isShrunk) return;
+                const el = document.getElementById("services");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B] bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-all cursor-pointer"
+            >
+              <span>Explore Services</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      {/* 2. DUBFLIX SHRINKING CENTRAL VIDEO CONTAINER */}
-      <div
-        ref={videoWrapperRef}
-        className="relative z-10 w-full h-full overflow-hidden transition-all duration-300 flex flex-col justify-center items-center transform-gpu"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          borderRadius: "0px",
-        }}
-      >
-        <video
-          ref={videoMediaRef}
-          src={videoAsset}
-          poster={posterAsset}
-          autoPlay
-          muted={isMuted}
-          loop
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover filter brightness-105 contrast-110"
-        />
+        {/* 2. CENTRAL VIDEO CONTAINER (Shrinks on scroll) */}
+        <div
+          ref={videoWrapperRef}
+          className="relative z-20 w-full h-full overflow-hidden flex flex-col justify-center items-center transform-gpu border border-transparent shadow-none"
+          style={{
+            width: "100vw",
+            height: "100vh",
+            borderRadius: "0px",
+          }}
+        >
+          <video
+            ref={videoMediaRef}
+            src={videoAsset}
+            poster={posterAsset}
+            autoPlay
+            muted={isMuted}
+            loop
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover filter brightness-105 contrast-110"
+          />
 
-        {/* Video Overlay Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/90 via-[#11100E]/30 to-[#11100E]/50 z-10 pointer-events-none" />
+          {/* Video Overlay Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/90 via-[#11100E]/30 to-[#11100E]/50 z-10 pointer-events-none" />
 
-        {/* Shrunk State Title Overlay inside Active Card */}
-        {isShrunk && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute inset-x-0 bottom-0 p-6 sm:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#11100E] via-[#11100E]/80 to-transparent"
+    
+          {/* Shrunk State Title Overlay inside Central Video Card */}
+          <div
+            ref={shrunkOverlayRef}
+            className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#11100E] via-[#11100E]/80 to-transparent pointer-events-none opacity-0"
           >
-            <span className="px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+            <span className="px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
               {reels[activeReelIndex].category}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#F3F0E8] tracking-tight drop-shadow-md">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#F3F0E8] tracking-tight drop-shadow-md">
               {reels[activeReelIndex].headline}
             </h2>
-            <p className="text-xs sm:text-sm text-[#A8A39A] mt-1">
+            <p className="text-[11px] sm:text-xs md:text-sm text-[#A8A39A] mt-1 max-w-md">
               {reels[activeReelIndex].sub}
             </p>
-          </motion.div>
-        )}
-      </div>
-
-      {/* 3. HORIZONTAL CAROUSEL SIDE REEL CARDS (Reveals on Scroll) */}
-      <div
-        ref={sideCardsRef}
-        className="absolute inset-x-0 z-30 top-1/2 -translate-y-1/2 flex items-center justify-between px-4 sm:px-12 pointer-events-none opacity-0"
-      >
-        {/* Left Side Reel Card */}
-        <div
-          onClick={handlePrevReel}
-          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-6"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#201F1C] to-[#181715] z-0" />
-          <div className="relative z-10 flex items-center justify-between">
-            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider">
-              {reels[(activeReelIndex - 1 + reels.length) % reels.length].category}
-            </span>
-            <div className="w-8 h-8 rounded-full bg-[#201F1C] border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
-              <ChevronLeft className="w-4 h-4" />
-            </div>
-          </div>
-
-          <div className="relative z-10 text-left space-y-1">
-            <span className="text-[10px] uppercase font-mono text-[#A8A39A]/70 font-semibold block">PREVIOUS REEL</span>
-            <h4 className="text-sm sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1">
-              {reels[(activeReelIndex - 1 + reels.length) % reels.length].headline}
-            </h4>
-            <p className="text-[11px] text-[#A8A39A] line-clamp-1">
-              {reels[(activeReelIndex - 1 + reels.length) % reels.length].sub}
-            </p>
           </div>
         </div>
 
-        {/* Right Side Reel Card */}
-        <div
-          onClick={handleNextReel}
-          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-6"
-        >
-          <div className="absolute inset-0 bg-gradient-to-bl from-[#201F1C] to-[#181715] z-0" />
-          <div className="relative z-10 flex items-center justify-between">
-            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider">
-              {reels[(activeReelIndex + 1) % reels.length].category}
-            </span>
-            <div className="w-8 h-8 rounded-full bg-[#201F1C] border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-          </div>
-
-          <div className="relative z-10 text-right space-y-1">
-            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold block">NEXT REEL</span>
-            <h4 className="text-sm sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1">
-              {reels[(activeReelIndex + 1) % reels.length].headline}
-            </h4>
-            <p className="text-[11px] text-[#A8A39A] line-clamp-1">
-              {reels[(activeReelIndex + 1) % reels.length].sub}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. BOTTOM FLOATING STATS STRIP */}
-      <div
-        ref={statsRef}
-        className="absolute bottom-6 inset-x-4 sm:inset-x-8 z-30 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 pointer-events-auto opacity-0"
-      >
-        {stats.map((stat, idx) => (
+        {/* 3. CAROUSEL SIDE CARDS (Phase 2 & 3 - Slide & Fade In) */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-between px-2 sm:px-6 md:px-12 pointer-events-none w-full max-w-7xl mx-auto">
+          {/* Left Card: PREVIOUS REEL */}
           <div
-            key={idx}
-            className="p-3 sm:p-4 rounded-2xl border border-[#34312B] flex flex-col items-center text-center bg-[#201F1C] hover:border-[#C8A46B]/40 transition-colors"
+            ref={leftCardRef}
+            onClick={handlePrevReel}
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
-            <stat.icon className="w-4 h-4 text-[#C8A46B] mb-1" />
-            <span className="text-xl sm:text-2xl font-extrabold text-[#F3F0E8] tracking-tight">
-              {stat.value}
-            </span>
-            <span className="text-[10px] text-[#A8A39A] font-medium mt-0.5">
-              {stat.label}
-            </span>
+            {/* Background Video */}
+            <video
+              src={videoAsset}
+              poster={posterAsset}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/95 via-[#11100E]/60 to-[#11100E]/40 z-5" />
+
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
+                {reels[prevIndex].category}
+              </span>
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+                <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </div>
+            </div>
+
+            <div className="relative z-10 text-left space-y-0.5 sm:space-y-1">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#A8A39A]/70 font-semibold block">
+                PREVIOUS REEL
+              </span>
+              <h4 className="text-xs sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+                {reels[prevIndex].headline}
+              </h4>
+              <p className="text-[10px] sm:text-[11px] text-[#A8A39A] line-clamp-1 hidden sm:block drop-shadow">
+                {reels[prevIndex].sub}
+              </p>
+            </div>
           </div>
-        ))}
+
+          {/* Right Card: NEXT REEL */}
+          <div
+            ref={rightCardRef}
+            onClick={handleNextReel}
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+          >
+            {/* Background Video */}
+            <video
+              src={videoAsset}
+              poster={posterAsset}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/95 via-[#11100E]/60 to-[#11100E]/40 z-5" />
+
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
+                {reels[nextIndex].category}
+              </span>
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </div>
+            </div>
+
+            <div className="relative z-10 text-right space-y-0.5 sm:space-y-1">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold block">
+                NEXT REEL
+              </span>
+              <h4 className="text-xs sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+                {reels[nextIndex].headline}
+              </h4>
+              <p className="text-[10px] sm:text-[11px] text-[#A8A39A] line-clamp-1 hidden sm:block drop-shadow">
+                {reels[nextIndex].sub}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. BOTTOM FLOATING STATS STRIP (Phase 4 - Reveals after carousel) */}
+        <div
+          ref={statsRef}
+          className="absolute bottom-3 sm:bottom-6 inset-x-3 sm:inset-x-8 z-30 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 pointer-events-auto opacity-0"
+        >
+          {stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-[#34312B] flex flex-col items-center text-center bg-[#201F1C]/90 backdrop-blur-md hover:border-[#C8A46B]/40 transition-colors shadow-lg"
+            >
+              <stat.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8A46B] mb-0.5 sm:mb-1" />
+              <span className="text-lg sm:text-2xl font-extrabold text-[#F3F0E8] tracking-tight">
+                {stat.value}
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-[#A8A39A] font-medium mt-0.5">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+
