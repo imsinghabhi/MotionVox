@@ -47,7 +47,7 @@ export function WhyUs() {
   return (
     <section id="why-us" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B] overflow-hidden">
       {/* Background glow orbs */}
-      <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}

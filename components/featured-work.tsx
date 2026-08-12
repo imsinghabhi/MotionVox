@@ -106,7 +106,7 @@ export function FeaturedWork() {
   return (
     <section id="featured-work" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#11100E]">
       {/* Glow background */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#C8A46B]/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header & Tabs */}
@@ -144,12 +144,11 @@ export function FeaturedWork() {
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="group relative bg-[#201F1C] rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 overflow-hidden flex flex-col justify-between cursor-pointer transition-all duration-300 shadow-lg"
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35, delay: idx * 0.04 }}
+              className="group relative bg-[#201F1C] rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 overflow-hidden flex flex-col justify-between cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
               onClick={() => setSelectedProject(project)}
             >
               {/* Card Banner Preview */}

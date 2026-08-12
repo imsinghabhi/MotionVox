@@ -154,7 +154,7 @@ export function Services() {
   return (
     <section id="services" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#11100E]">
       {/* Background glow orb */}
-      <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -183,12 +183,12 @@ export function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 shadow-lg"
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
                 onClick={() => setSelectedService(service)}
               >
                 {/* Background Hover Shimmer */}
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C8A46B]/10 rounded-full blur-2xl group-hover:bg-[#C8A46B]/20 group-hover:scale-150 transition-all duration-500 pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C8A46B]/10 rounded-full blur-xl group-hover:bg-[#C8A46B]/20 group-hover:scale-150 transition-all duration-500 pointer-events-none transform-gpu" />
 
                 <div>
                   {/* Category & Icon */}

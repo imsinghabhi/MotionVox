@@ -12,7 +12,7 @@ export function MouseSpotlight() {
       cancelAnimationFrame(animationFrameId);
       animationFrameId = requestAnimationFrame(() => {
         if (spotlightRef.current) {
-          spotlightRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(200, 164, 107, 0.035), transparent 80%)`;
+          spotlightRef.current.style.transform = `translate3d(${e.clientX - 300}px, ${e.clientY - 300}px, 0)`;
           spotlightRef.current.style.opacity = "1";
         }
       });
@@ -37,7 +37,8 @@ export function MouseSpotlight() {
   return (
     <div
       ref={spotlightRef}
-      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-0 will-change-[background,opacity]"
+      className="pointer-events-none fixed top-0 left-0 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(200,164,107,0.05),transparent_70%)] z-30 transition-opacity duration-300 opacity-0 transform-gpu will-change-transform"
     />
   );
 }
+
