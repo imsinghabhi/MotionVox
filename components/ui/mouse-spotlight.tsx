@@ -1,38 +1,43 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 export function MouseSpotlight() {
-  const [position, setPosition] = useState({ x: -1000, y: -1000 });
-  const [isVisible, setIsVisible] = useState(false);
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let animationFrameId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        if (spotlightRef.current) {
+          spotlightRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(200, 164, 107, 0.035), transparent 80%)`;
+          spotlightRef.current.style.opacity = "1";
+        }
+      });
     };
 
     const handleMouseLeave = () => {
-      setIsVisible(false);
+      if (spotlightRef.current) {
+        spotlightRef.current.style.opacity = "0";
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    document.body.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.body.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("mousemove", handleMouseMove);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isVisible]);
-
-  if (!isVisible) return null;
+  }, []);
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-500"
-      style={{
-        background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(200, 164, 107, 0.035), transparent 80%)`,
-      }}
+      ref={spotlightRef}
+      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-0 will-change-[background,opacity]"
     />
   );
 }

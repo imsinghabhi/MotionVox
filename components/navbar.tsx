@@ -60,6 +60,12 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         {/* Brand / Logo */}
         <Link
           href="/"
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="flex items-center gap-3 group cursor-pointer"
         >
           <div className="relative w-8 h-8 rounded-full border border-[#34312B] group-hover:border-[#C8A46B] transition-colors overflow-hidden shrink-0 shadow-md">

@@ -103,8 +103,8 @@ export function Hero({ onOpenDemo }: HeroProps) {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom 20%",
-          scrub: 1,
+          end: "bottom top",
+          scrub: 0.5,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (self.progress > 0.12) {
@@ -132,16 +132,15 @@ export function Hero({ onOpenDemo }: HeroProps) {
         0
       );
 
-      // 2. Dissolve hero overlay text like fog as user scrolls downward
+      // 2. Dissolve hero overlay text efficiently as user scrolls downward
       tl.to(
         textContainerRef.current,
         {
           opacity: 0,
           autoAlpha: 0,
-          filter: "blur(28px)",
-          scale: 1.08,
-          y: -80,
-          ease: "power2.out",
+          scale: 0.96,
+          y: -50,
+          ease: "power1.out",
           duration: 0.5,
         },
         0
@@ -190,15 +189,15 @@ export function Hero({ onOpenDemo }: HeroProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-[#11100E] flex flex-col items-center justify-center"
+      className="relative w-full h-screen overflow-hidden bg-[#11100E] flex flex-col items-center justify-center will-change-transform"
     >
       {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[#C8A46B]/5 rounded-full blur-[200px] pointer-events-none z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none z-0 transform-gpu" />
 
       {/* 1. MAIN HERO OVERLAY TEXT (Visible before scroll shrink) */}
       <div
         ref={textContainerRef}
-        className="absolute z-20 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start pointer-events-none"
+        className="absolute z-20 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start pointer-events-none will-change-[transform,opacity]"
       >
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
           Refined Media Solutions, <br className="hidden sm:inline" />
@@ -247,7 +246,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
       {/* 2. DUBFLIX SHRINKING CENTRAL VIDEO CONTAINER */}
       <div
         ref={videoWrapperRef}
-        className="relative z-10 w-full h-full overflow-hidden transition-all duration-300 flex flex-col justify-center items-center"
+        className="relative z-10 w-full h-full overflow-hidden transition-all duration-300 flex flex-col justify-center items-center transform-gpu"
         style={{
           width: "100vw",
           height: "100vh",
@@ -295,57 +294,53 @@ export function Hero({ onOpenDemo }: HeroProps) {
         {/* Left Side Reel Card */}
         <div
           onClick={handlePrevReel}
-          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#201F1C] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105"
+          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-6"
         >
-          <video
-            src={videoAsset}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover filter brightness-90 contrast-100 group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/90 via-[#11100E]/40 to-transparent z-10" />
-          <div className="absolute bottom-4 left-4 z-20 text-left">
-            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold block">PREVIOUS REEL</span>
-            <p className="text-xs sm:text-sm font-bold text-[#F3F0E8] line-clamp-1">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#201F1C] to-[#181715] z-0" />
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider">
+              {reels[(activeReelIndex - 1 + reels.length) % reels.length].category}
+            </span>
+            <div className="w-8 h-8 rounded-full bg-[#201F1C] border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
+              <ChevronLeft className="w-4 h-4" />
+            </div>
+          </div>
+
+          <div className="relative z-10 text-left space-y-1">
+            <span className="text-[10px] uppercase font-mono text-[#A8A39A]/70 font-semibold block">PREVIOUS REEL</span>
+            <h4 className="text-sm sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1">
               {reels[(activeReelIndex - 1 + reels.length) % reels.length].headline}
+            </h4>
+            <p className="text-[11px] text-[#A8A39A] line-clamp-1">
+              {reels[(activeReelIndex - 1 + reels.length) % reels.length].sub}
             </p>
           </div>
-          <button
-            onClick={handlePrevReel}
-            className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors cursor-pointer"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Right Side Reel Card */}
         <div
           onClick={handleNextReel}
-          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#201F1C] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105"
+          className="relative w-44 sm:w-64 md:w-80 h-64 sm:h-80 rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715] shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-6"
         >
-          <video
-            src={videoAsset}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover filter brightness-90 contrast-100 group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/90 via-[#11100E]/40 to-transparent z-10" />
-          <div className="absolute bottom-4 right-4 z-20 text-right">
+          <div className="absolute inset-0 bg-gradient-to-bl from-[#201F1C] to-[#181715] z-0" />
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider">
+              {reels[(activeReelIndex + 1) % reels.length].category}
+            </span>
+            <div className="w-8 h-8 rounded-full bg-[#201F1C] border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          <div className="relative z-10 text-right space-y-1">
             <span className="text-[10px] uppercase font-mono text-[#C8A46B] font-semibold block">NEXT REEL</span>
-            <p className="text-xs sm:text-sm font-bold text-[#F3F0E8] line-clamp-1">
+            <h4 className="text-sm sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1">
               {reels[(activeReelIndex + 1) % reels.length].headline}
+            </h4>
+            <p className="text-[11px] text-[#A8A39A] line-clamp-1">
+              {reels[(activeReelIndex + 1) % reels.length].sub}
             </p>
           </div>
-          <button
-            onClick={handleNextReel}
-            className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors cursor-pointer"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
         </div>
       </div>
 
