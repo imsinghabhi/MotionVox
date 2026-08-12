@@ -16,7 +16,14 @@
     color-scheme: dark;
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    scroll-behavior: smooth;
+  }
+
+  html.lenis, html.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  html.lenis-smooth iframe {
+    pointer-events: none;
   }
 
   body {

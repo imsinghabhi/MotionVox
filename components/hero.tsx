@@ -42,7 +42,8 @@ export function Hero({ onOpenDemo }: HeroProps) {
   const sideCardsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  const videoAsset = "/hf_20260731_191844_c49d7a90-efc6-4f52-a979-ad7abeb1ea6e.mp4";
+  const videoAsset = "/hero-video.mp4";
+  const posterAsset = "/hero-poster.jpg";
 
   const reels: ReelCard[] = [
     {
@@ -256,10 +257,12 @@ export function Hero({ onOpenDemo }: HeroProps) {
         <video
           ref={videoMediaRef}
           src={videoAsset}
+          poster={posterAsset}
           autoPlay
           muted={isMuted}
           loop
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover filter brightness-105 contrast-110"
         />
 
