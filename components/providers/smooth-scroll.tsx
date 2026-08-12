@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -19,6 +22,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
+      autoResize: true,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -30,11 +34,27 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
+    // Watch for dynamic DOM height changes (async posts fetching, image loads, layout updates)
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    });
+
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
+
     return () => {
+      resizeObserver.disconnect();
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);
+
+  // Recalculate scroll limit on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return <>{children}</>;
 }
