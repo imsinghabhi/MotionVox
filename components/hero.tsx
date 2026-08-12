@@ -137,6 +137,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
         textContainerRef.current,
         {
           opacity: 0,
+          autoAlpha: 0,
           filter: "blur(28px)",
           scale: 1.08,
           y: -80,
@@ -176,11 +177,13 @@ export function Hero({ onOpenDemo }: HeroProps) {
     return () => ctx.revert();
   }, []);
 
-  const handleNextReel = () => {
+  const handleNextReel = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setActiveReelIndex((prev) => (prev + 1) % reels.length);
   };
 
-  const handlePrevReel = () => {
+  const handlePrevReel = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setActiveReelIndex((prev) => (prev - 1 + reels.length) % reels.length);
   };
 
@@ -195,7 +198,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
       {/* 1. MAIN HERO OVERLAY TEXT (Visible before scroll shrink) */}
       <div
         ref={textContainerRef}
-        className="absolute z-40 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start pointer-events-none"
+        className="absolute z-20 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start pointer-events-none"
       >
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
           Refined Media Solutions, <br className="hidden sm:inline" />
@@ -206,11 +209,19 @@ export function Hero({ onOpenDemo }: HeroProps) {
           MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto pointer-events-auto relative z-50">
+        <div
+          className={`flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-20 ${
+            isShrunk ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
+          } transition-opacity duration-300`}
+        >
           <button
             type="button"
-            onClick={onOpenDemo}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg relative z-50 pointer-events-auto transition-all"
+            onClick={(e) => {
+              if (isShrunk) return;
+              onOpenDemo();
+            }}
+            disabled={isShrunk}
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg transition-all"
           >
             <span>Book a Demo</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -220,12 +231,13 @@ export function Hero({ onOpenDemo }: HeroProps) {
             href="#services"
             onClick={(e) => {
               e.preventDefault();
+              if (isShrunk) return;
               const el = document.getElementById("services");
               if (el) {
                 el.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B] bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-all relative z-50 pointer-events-auto cursor-pointer"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B] bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-all cursor-pointer"
           >
             <span>Explore Services</span>
           </a>
@@ -278,7 +290,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
       {/* 3. HORIZONTAL CAROUSEL SIDE REEL CARDS (Reveals on Scroll) */}
       <div
         ref={sideCardsRef}
-        className="absolute inset-x-0 z-20 top-1/2 -translate-y-1/2 flex items-center justify-between px-4 sm:px-12 pointer-events-none opacity-0"
+        className="absolute inset-x-0 z-30 top-1/2 -translate-y-1/2 flex items-center justify-between px-4 sm:px-12 pointer-events-none opacity-0"
       >
         {/* Left Side Reel Card */}
         <div
@@ -300,7 +312,10 @@ export function Hero({ onOpenDemo }: HeroProps) {
               {reels[(activeReelIndex - 1 + reels.length) % reels.length].headline}
             </p>
           </div>
-          <button className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
+          <button
+            onClick={handlePrevReel}
+            className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors cursor-pointer"
+          >
             <ChevronLeft className="w-5 h-5" />
           </button>
         </div>
@@ -325,7 +340,10 @@ export function Hero({ onOpenDemo }: HeroProps) {
               {reels[(activeReelIndex + 1) % reels.length].headline}
             </p>
           </div>
-          <button className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
+          <button
+            onClick={handleNextReel}
+            className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-[#11100E]/80 text-[#F3F0E8] z-20 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors cursor-pointer"
+          >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
