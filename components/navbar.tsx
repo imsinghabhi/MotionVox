@@ -22,14 +22,15 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let prevScrolled = false;
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== prevScrolled) {
+        prevScrolled = isScrolled;
+        setScrolled(isScrolled);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

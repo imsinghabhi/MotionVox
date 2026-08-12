@@ -30,7 +30,7 @@ export function TrustedBy() {
 
       {/* Infinite Marquee Container */}
       <div className="flex overflow-hidden select-none">
-        <div className="animate-marquee flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16">
+        <div className="animate-marquee flex items-center gap-12 sm:gap-16 pr-12 sm:pr-16 transform-gpu">
           {[...partners, ...partners].map((item, idx) => (
             <div
               key={idx}
