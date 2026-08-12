@@ -67,7 +67,7 @@ export default function PublicBlogPage() {
 
       {/* Hero Header Section */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C8A46B]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
         <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] text-xs font-mono font-medium">

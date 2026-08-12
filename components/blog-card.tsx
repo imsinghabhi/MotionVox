@@ -15,13 +15,13 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     return (
       <Link
         href={`/blog/${post.slug}`}
-        className="group relative rounded-3xl overflow-hidden bg-[#201F1C] border border-[#34312B] grid grid-cols-1 lg:grid-cols-12 gap-6 hover:border-[#C8A46B]/50 transition-all duration-500 shadow-2xl"
+        className="group relative rounded-3xl overflow-hidden bg-[#201F1C] border border-[#34312B] grid grid-cols-1 lg:grid-cols-12 gap-6 hover:border-[#C8A46B]/50 transition-colors duration-300 shadow-2xl transform-gpu"
       >
         <div className="lg:col-span-7 relative h-72 lg:h-auto overflow-hidden">
           <img
             src={post.coverImage}
             alt={post.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#201F1C] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#201F1C]/90" />
           <div className="absolute top-4 left-4 flex gap-2">
@@ -63,7 +63,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
               </div>
             </div>
 
-            <span className="w-10 h-10 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] flex items-center justify-center group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-all">
+            <span className="w-10 h-10 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] flex items-center justify-center group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </span>
           </div>
@@ -75,7 +75,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group relative rounded-2xl overflow-hidden bg-[#201F1C] border border-[#34312B] flex flex-col justify-between hover:border-[#C8A46B]/50 transition-all duration-300 hover:-translate-y-1 shadow-lg"
+      className="group relative rounded-2xl overflow-hidden bg-[#201F1C] border border-[#34312B] flex flex-col justify-between hover:border-[#C8A46B]/50 transition-colors duration-300 shadow-lg transform-gpu"
     >
       <div>
         <div className="relative aspect-[16/10] overflow-hidden bg-[#181715]">
@@ -88,7 +88,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#11100E]/80 backdrop-blur-md border border-[#34312B] text-[#C8A46B]"
+                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#11100E]/90 border border-[#34312B] text-[#C8A46B]"
               >
                 {tag}
               </span>
@@ -132,3 +132,4 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     </Link>
   );
 }
+
