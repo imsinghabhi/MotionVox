@@ -47,7 +47,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
             </p>
 
             {/* Quick Stats / Guarantees */}
-            <div className="space-y-4 pt-4 border-t border-[#34312B]">
+            <div className="space-y-4 pt-4 border-t border-[#34312B]/40">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-full bg-[#C8A46B]/10 text-[#C8A46B]">
                   <Clock className="w-5 h-5" />
@@ -82,7 +82,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
             </div>
 
             {/* Book Demo Trigger Card */}
-            <div className="p-6 rounded-3xl bg-[#181715] border border-[#34312B] flex items-center justify-between gap-4 shadow-lg">
+            <div className="p-6 rounded-3xl bg-[#181715] border border-[#34312B]/40 flex items-center justify-between gap-4 shadow-lg">
               <div>
                 <span className="text-xs font-mono text-[#C8A46B] font-semibold uppercase tracking-wider block mb-1">
                   Prefer a Live Walkthrough?
@@ -102,15 +102,15 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
           </div>
 
           {/* Right Column: Studio Form */}
-          <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B] shadow-2xl">
-            <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-10 border border-[#34312B]">
+          <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B]/40 shadow-2xl">
+            <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-10 border border-[#34312B]/40">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="py-16 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-full bg-[#C8A46B]/15 border border-[#C8A46B] text-[#C8A46B] flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 rounded-full bg-[#C8A46B]/15 border border-[#C8A46B]/30 text-[#C8A46B] flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-[#F3F0E8]">Proposal Request Received!</h3>
@@ -119,7 +119,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-6 px-6 py-2.5 rounded-full bg-[#201F1C] border border-[#34312B] text-xs font-semibold text-[#F3F0E8] hover:border-[#C8A46B] transition-colors cursor-pointer"
+                    className="mt-6 px-6 py-2.5 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-xs font-semibold text-[#F3F0E8] hover:border-[#C8A46B]/40 transition-colors cursor-pointer"
                   >
                     Submit Another Request
                   </button>
@@ -138,7 +138,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                       placeholder="e.g. Alex Mercer"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-colors text-sm"
+                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B]/40 text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]/50 transition-colors text-sm"
                     />
                   </div>
 
@@ -152,7 +152,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-colors text-sm"
+                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B]/40 text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]/50 transition-colors text-sm"
                     />
                   </div>
 
@@ -164,7 +164,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B] transition-colors text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B]/40 text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B]/50 transition-colors text-sm"
                       >
                         <option value="Professional Dubbing">Professional Dubbing</option>
                         <option value="AI Video Avatars">AI Video Avatars</option>
@@ -182,7 +182,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                       <select
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B] transition-colors text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B]/40 text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B]/50 transition-colors text-sm"
                       >
                         <option value="< $5,000">&lt; $5,000</option>
                         <option value="$5,000 - $15,000">$5,000 - $15,000</option>
@@ -201,7 +201,7 @@ export function ContactSection({ onOpenDemo }: ContactSectionProps) {
                       placeholder="Tell us about your objectives, volume, or specific requirements..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-colors text-sm resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B]/40 text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]/50 transition-colors text-sm resize-none"
                     />
                   </div>
 

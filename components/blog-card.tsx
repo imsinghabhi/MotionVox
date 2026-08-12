@@ -15,7 +15,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     return (
       <Link
         href={`/blog/${post.slug}`}
-        className="group relative rounded-3xl overflow-hidden bg-[#201F1C] border border-[#34312B] grid grid-cols-1 lg:grid-cols-12 gap-6 hover:border-[#C8A46B]/50 transition-colors duration-300 shadow-2xl transform-gpu"
+        className="group relative rounded-3xl overflow-hidden bg-[#201F1C] border border-[#34312B]/40 grid grid-cols-1 lg:grid-cols-12 gap-6 hover:border-[#C8A46B]/40 transition-colors duration-300 shadow-2xl transform-gpu"
       >
         <div className="lg:col-span-7 relative h-72 lg:h-auto overflow-hidden">
           <img
@@ -50,12 +50,12 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             </p>
           </div>
 
-          <div className="pt-6 mt-6 border-t border-[#34312B] flex items-center justify-between">
+          <div className="pt-6 mt-6 border-t border-[#34312B]/40 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
                 src={post.author.avatar}
                 alt={post.author.name}
-                className="w-9 h-9 rounded-full object-cover border border-[#34312B]"
+                className="w-9 h-9 rounded-full object-cover border border-[#34312B]/40"
               />
               <div>
                 <p className="text-xs font-medium text-[#F3F0E8]">{post.author.name}</p>
@@ -63,7 +63,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
               </div>
             </div>
 
-            <span className="w-10 h-10 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] flex items-center justify-center group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
+            <span className="w-10 h-10 rounded-full bg-[#181715] border border-[#34312B]/40 text-[#C8A46B] flex items-center justify-center group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors">
               <ArrowUpRight className="w-5 h-5" />
             </span>
           </div>
@@ -75,7 +75,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group relative rounded-2xl overflow-hidden bg-[#201F1C] border border-[#34312B] flex flex-col justify-between hover:border-[#C8A46B]/50 transition-colors duration-300 shadow-lg transform-gpu"
+      className="group relative rounded-2xl overflow-hidden bg-[#201F1C] border border-[#34312B]/40 flex flex-col justify-between hover:border-[#C8A46B]/40 transition-colors duration-300 shadow-lg transform-gpu"
     >
       <div>
         <div className="relative aspect-[16/10] overflow-hidden bg-[#181715]">
@@ -88,7 +88,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#11100E]/90 border border-[#34312B] text-[#C8A46B]"
+                className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#11100E]/90 border border-[#34312B]/40 text-[#C8A46B]"
               >
                 {tag}
               </span>
@@ -115,12 +115,12 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         </div>
       </div>
 
-      <div className="px-6 py-4 border-t border-[#34312B] flex items-center justify-between bg-[#181715]">
+      <div className="px-6 py-4 border-t border-[#34312B]/40 flex items-center justify-between bg-[#181715]">
         <div className="flex items-center gap-2.5">
           <img
             src={post.author.avatar}
             alt={post.author.name}
-            className="w-7 h-7 rounded-full object-cover border border-[#34312B]"
+            className="w-7 h-7 rounded-full object-cover border border-[#34312B]/40"
           />
           <span className="text-xs text-[#F3F0E8] font-medium">{post.author.name}</span>
         </div>

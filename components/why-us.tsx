@@ -45,14 +45,14 @@ export function WhyUs() {
   ];
 
   return (
-    <section id="why-us" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B] overflow-hidden">
+    <section id="why-us" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]/40 overflow-hidden">
       {/* Background glow orbs */}
       <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Why MotionVox
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight mb-6">
@@ -83,7 +83,7 @@ export function WhyUs() {
               >
                 {/* Content Block */}
                 <div className="flex-1 space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] text-xs font-mono">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/20 text-[#C8A46B] text-xs font-mono">
                     <Icon className="w-4 h-4" />
                     <span>{pillar.subtitle}</span>
                   </div>
@@ -96,7 +96,7 @@ export function WhyUs() {
                     {pillar.description}
                   </p>
 
-                  <div className="pt-4 flex items-center gap-6 border-t border-[#34312B]">
+                  <div className="pt-4 flex items-center gap-6 border-t border-[#34312B]/40">
                     <div>
                       <span className="text-3xl sm:text-4xl font-extrabold text-[#F3F0E8] tracking-tight">
                         {pillar.stat}
@@ -110,12 +110,12 @@ export function WhyUs() {
 
                 {/* Visual Showcase Card */}
                 <div className="flex-1 w-full">
-                  <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B] shadow-2xl overflow-hidden group">
+                  <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B]/40 shadow-2xl overflow-hidden group">
                     <div className="relative rounded-[22px] bg-[#181715] p-8 min-h-[280px] sm:min-h-[320px] flex flex-col justify-between overflow-hidden">
                       <div className="absolute top-0 right-0 w-64 h-64 bg-[#C8A46B]/10 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700 pointer-events-none" />
 
                       <div className="flex items-center justify-between z-10">
-                        <div className="p-4 rounded-2xl bg-[#201F1C] border border-[#34312B] text-[#C8A46B]">
+                        <div className="p-4 rounded-2xl bg-[#201F1C] border border-[#34312B]/40 text-[#C8A46B]">
                           <Icon className="w-8 h-8" />
                         </div>
                         <span className="font-mono text-xs text-[#A8A39A]/60 uppercase tracking-widest">
@@ -124,12 +124,12 @@ export function WhyUs() {
                       </div>
 
                       <div className="z-10 mt-12">
-                        <div className="p-4 rounded-xl bg-[#201F1C] border border-[#34312B] space-y-2">
+                        <div className="p-4 rounded-xl bg-[#201F1C] border border-[#34312B]/40 space-y-2">
                           <div className="flex items-center justify-between text-xs text-[#A8A39A] font-mono">
                             <span>SYSTEM_STATUS</span>
                             <span className="text-[#C8A46B] font-semibold">OPTIMAL</span>
                           </div>
-                          <div className="h-1.5 w-full bg-[#34312B] rounded-full overflow-hidden">
+                          <div className="h-1.5 w-full bg-[#34312B]/50 rounded-full overflow-hidden">
                             <div className="h-full bg-[#C8A46B] rounded-full w-4/5 animate-pulse" />
                           </div>
                         </div>

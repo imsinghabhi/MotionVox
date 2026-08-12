@@ -45,11 +45,11 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]">
+    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]/40">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Got Questions?
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight mb-4">
@@ -67,14 +67,14 @@ export function FAQ() {
             return (
               <div
                 key={idx}
-                className="bg-[#201F1C] rounded-2xl border border-[#34312B] overflow-hidden transition-colors shadow-md"
+                className="bg-[#201F1C] rounded-2xl border border-[#34312B]/40 overflow-hidden transition-colors shadow-md"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
                   className="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-[#F3F0E8] text-base sm:text-lg hover:text-[#C8A46B] transition-colors focus:outline-none cursor-pointer"
                 >
                   <span>{faq.question}</span>
-                  <div className="p-2 rounded-full bg-[#181715] text-[#C8A46B] border border-[#34312B] shrink-0">
+                  <div className="p-2 rounded-full bg-[#181715] text-[#C8A46B] border border-[#34312B]/40 shrink-0">
                     {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                   </div>
                 </button>
@@ -88,7 +88,7 @@ export function FAQ() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 pt-2 text-sm text-[#A8A39A] leading-relaxed border-t border-[#34312B]">
+                      <div className="px-6 pb-6 pt-2 text-sm text-[#A8A39A] leading-relaxed border-t border-[#34312B]/40">
                         {faq.answer}
                       </div>
                     </motion.div>

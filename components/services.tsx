@@ -160,7 +160,7 @@ export function Services() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
               <Sparkles className="w-3.5 h-3.5 text-[#C8A46B]" /> Core Capabilities
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight">
@@ -184,7 +184,7 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
+                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B]/40 hover:border-[#C8A46B]/40 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
                 onClick={() => setSelectedService(service)}
               >
                 {/* Background Hover Shimmer */}
@@ -193,7 +193,7 @@ export function Services() {
                 <div>
                   {/* Category & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <div className="p-3.5 rounded-2xl bg-[#181715] border border-[#34312B] text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] group-hover:border-[#C8A46B] transition-all duration-300 shadow-md">
+                    <div className="p-3.5 rounded-2xl bg-[#181715] border border-[#34312B]/40 text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] group-hover:border-[#C8A46B] transition-all duration-300 shadow-md">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[10px] uppercase font-mono tracking-widest text-[#A8A39A]/70 group-hover:text-[#A8A39A] transition-colors">
@@ -210,7 +210,7 @@ export function Services() {
                   </p>
 
                   {/* Features list */}
-                  <div className="space-y-2 border-t border-[#34312B] pt-5 mb-6">
+                  <div className="space-y-2 border-t border-[#34312B]/40 pt-5 mb-6">
                     {service.features.slice(0, 3).map((feat, fIdx) => (
                       <div key={fIdx} className="flex items-center gap-2 text-xs text-[#F3F0E8]">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#C8A46B] shrink-0" />
@@ -225,7 +225,7 @@ export function Services() {
                   <span className="text-xs font-medium text-[#C8A46B] group-hover:underline flex items-center gap-1">
                     View Specs
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-[#181715] flex items-center justify-center text-[#A8A39A] group-hover:text-[#11100E] group-hover:bg-[#C8A46B] group-hover:scale-110 transition-all border border-[#34312B]">
+                  <div className="w-8 h-8 rounded-full bg-[#181715] flex items-center justify-center text-[#A8A39A] group-hover:text-[#11100E] group-hover:bg-[#C8A46B] group-hover:scale-110 transition-all border border-[#34312B]/40">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>

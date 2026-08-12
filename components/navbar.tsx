@@ -54,8 +54,8 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
       <nav
         className={`pointer-events-auto flex items-center justify-between transition-all duration-500 rounded-full px-5 py-3 border ${
           scrolled
-            ? "w-full max-w-5xl bg-[#181715]/95 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] py-2.5 border-[#34312B]"
-            : "w-full max-w-6xl bg-[#181715]/60 border-[#34312B]/80 backdrop-blur-md"
+            ? "w-full max-w-5xl bg-[#181715]/95 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] py-2.5 border-[#34312B]/50"
+            : "w-full max-w-6xl bg-[#181715]/60 border-[#34312B]/40 backdrop-blur-md"
         }`}
       >
         {/* Brand / Logo */}
@@ -69,7 +69,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           }}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <div className="relative w-8 h-8 rounded-full border border-[#34312B] group-hover:border-[#C8A46B] transition-colors overflow-hidden shrink-0 shadow-md">
+          <div className="relative w-8 h-8 rounded-full border border-[#34312B]/50 group-hover:border-[#C8A46B]/40 transition-colors overflow-hidden shrink-0 shadow-md">
             <Image
               src="/IMG_3249.PNG"
               alt="MotionVox Logo"
@@ -89,12 +89,12 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1 rounded-full bg-[#201F1C]/80 border border-[#34312B]">
+        <div className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1 rounded-full bg-[#201F1C]/80 border border-[#34312B]/40">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="px-3.5 py-1.5 text-xs font-medium text-[#A8A39A] hover:text-[#F3F0E8] rounded-full hover:bg-[#34312B]/50 transition-all duration-200"
+              className="px-3.5 py-1.5 text-xs font-medium text-[#A8A39A] hover:text-[#F3F0E8] rounded-full hover:bg-[#34312B]/40 transition-all duration-200"
             >
               {link.name}
             </a>
@@ -114,7 +114,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full bg-[#201F1C] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] focus:outline-none"
+            className="md:hidden p-2 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-[#A8A39A] hover:text-[#F3F0E8] focus:outline-none"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

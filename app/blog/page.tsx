@@ -70,7 +70,7 @@ export default function PublicBlogPage() {
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
         <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] text-xs font-mono font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B]/40 text-[#C8A46B] text-xs font-mono font-medium">
             <Sparkles className="w-3.5 h-3.5" /> Insights & Intelligence
           </div>
 
@@ -92,7 +92,7 @@ export default function PublicBlogPage() {
               placeholder="Search articles by keyword or topic..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#181715] border border-[#34312B] text-sm text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-all shadow-xl"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#181715] border border-[#34312B]/40 text-sm text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]/50 transition-all shadow-xl"
             />
           </div>
 
@@ -106,7 +106,7 @@ export default function PublicBlogPage() {
                   className={`px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     selectedTag === tag
                       ? "bg-[#C8A46B] text-[#11100E] shadow-md font-semibold"
-                      : "bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] hover:border-[#C8A46B]/40"
+                      : "bg-[#181715] border border-[#34312B]/40 text-[#A8A39A] hover:text-[#F3F0E8] hover:border-[#C8A46B]/30"
                   }`}
                 >
                   {tag}
@@ -125,7 +125,7 @@ export default function PublicBlogPage() {
             <p className="text-sm text-[#A8A39A] font-mono">Curating journal articles...</p>
           </div>
         ) : filteredPosts.length === 0 ? (
-          <div className="py-24 text-center rounded-3xl bg-[#181715] border border-[#34312B] p-12">
+          <div className="py-24 text-center rounded-3xl bg-[#181715] border border-[#34312B]/40 p-12">
             <Newspaper className="w-12 h-12 text-[#A8A39A]/40 mx-auto mb-3" />
             <h3 className="text-lg font-bold text-[#F3F0E8]">No journal articles found</h3>
             <p className="text-xs text-[#A8A39A] mt-1">

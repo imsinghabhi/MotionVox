@@ -11,13 +11,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#11100E] border-t border-[#34312B] pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-[#A8A39A]">
+    <footer className="relative bg-[#11100E] border-t border-[#34312B]/40 pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-[#A8A39A]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#34312B]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#34312B]/40">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-              <div className="relative w-9 h-9 rounded-full border border-[#34312B] group-hover:border-[#C8A46B] transition-colors overflow-hidden shrink-0 shadow-md">
+              <div className="relative w-9 h-9 rounded-full border border-[#34312B]/40 group-hover:border-[#C8A46B]/40 transition-colors overflow-hidden shrink-0 shadow-md">
                 <Image
                   src="/IMG_3249.PNG"
                   alt="MotionVox Logo"
@@ -168,7 +168,7 @@ export function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B]/40 text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="X / Twitter"
             >
               <Share2 className="w-3.5 h-3.5" />
@@ -178,7 +178,7 @@ export function Footer() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B]/40 text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="LinkedIn"
             >
               <Globe className="w-3.5 h-3.5" />
@@ -188,7 +188,7 @@ export function Footer() {
               href="https://youtube.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B]/40 text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="YouTube"
             >
               <Video className="w-3.5 h-3.5" />
@@ -196,7 +196,7 @@ export function Footer() {
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-[#201F1C] border border-[#34312B] hover:bg-[#C8A46B] hover:text-[#11100E] text-[#F3F0E8] transition-all ml-2 cursor-pointer"
+              className="p-2 rounded-full bg-[#201F1C] border border-[#34312B]/40 hover:bg-[#C8A46B] hover:text-[#11100E] text-[#F3F0E8] transition-all ml-2 cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />

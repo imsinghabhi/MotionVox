@@ -112,7 +112,7 @@ export function FeaturedWork() {
         {/* Header & Tabs */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
               <Sparkles className="w-3.5 h-3.5" /> Featured Work
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight">
@@ -122,7 +122,7 @@ export function FeaturedWork() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-[#181715] border border-[#34312B]">
+          <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-[#181715] border border-[#34312B]/40">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -148,21 +148,21 @@ export function FeaturedWork() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, delay: idx * 0.04 }}
-              className="group relative bg-[#201F1C] rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 overflow-hidden flex flex-col justify-between cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
+              className="group relative bg-[#201F1C] rounded-3xl border border-[#34312B]/40 hover:border-[#C8A46B]/40 overflow-hidden flex flex-col justify-between cursor-pointer transition-all duration-300 shadow-lg transform-gpu"
               onClick={() => setSelectedProject(project)}
             >
               {/* Card Banner Preview */}
-              <div className="relative aspect-[16/10] bg-[#181715] overflow-hidden flex items-center justify-center p-6 border-b border-[#34312B]">
+              <div className="relative aspect-[16/10] bg-[#181715] overflow-hidden flex items-center justify-center p-6 border-b border-[#34312B]/40">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#201F1C] via-[#201F1C]/40 to-transparent z-10" />
-                <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-[#11100E]/80 backdrop-blur-md text-[10px] uppercase font-mono font-semibold tracking-wider text-[#C8A46B] border border-[#C8A46B]/30">
+                <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-[#11100E]/80 backdrop-blur-md text-[10px] uppercase font-mono font-semibold tracking-wider text-[#C8A46B] border border-[#C8A46B]/20">
                   {project.tag}
                 </div>
-                <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#C8A46B]/15 text-[#C8A46B] text-[10px] font-mono font-semibold border border-[#C8A46B]/30">
+                <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#C8A46B]/15 text-[#C8A46B] text-[10px] font-mono font-semibold border border-[#C8A46B]/20">
                   {project.metric}
                 </div>
 
                 <div className="z-20 text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#201F1C]/90 border border-[#34312B] flex items-center justify-center mx-auto mb-2 text-[#F3F0E8] group-hover:scale-110 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-all">
+                  <div className="w-12 h-12 rounded-full bg-[#201F1C]/90 border border-[#34312B]/40 flex items-center justify-center mx-auto mb-2 text-[#F3F0E8] group-hover:scale-110 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-all">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </div>
                   <span className="text-[11px] text-[#A8A39A] font-mono">CLICK TO INSPECT CASE STUDY</span>
@@ -183,7 +183,7 @@ export function FeaturedWork() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#34312B] flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-[#34312B]/40 flex items-center justify-between">
                   <span className="text-xs font-semibold text-[#C8A46B] flex items-center gap-1">
                     Read Breakdown
                   </span>

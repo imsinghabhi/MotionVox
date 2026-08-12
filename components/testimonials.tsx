@@ -63,7 +63,7 @@ export function Testimonials() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
               <Sparkles className="w-3.5 h-3.5" /> Client Proof
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight">
@@ -75,14 +75,14 @@ export function Testimonials() {
           <div className="flex items-center gap-3">
             <button
               onClick={prevReview}
-              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B] hover:border-[#C8A46B] text-[#F3F0E8] transition-colors"
+              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B]/40 hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-colors"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextReview}
-              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B] hover:border-[#C8A46B] text-[#F3F0E8] transition-colors"
+              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B]/40 hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-colors"
               aria-label="Next Testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -91,8 +91,8 @@ export function Testimonials() {
         </div>
 
         {/* Featured Testimonial Card */}
-        <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B] shadow-2xl overflow-hidden">
-          <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-12 border border-[#34312B] overflow-hidden">
+        <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B]/40 shadow-2xl overflow-hidden">
+          <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-12 border border-[#34312B]/40 overflow-hidden">
             <Quote className="w-16 h-16 text-[#C8A46B]/15 absolute top-6 right-8 pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl">
@@ -112,7 +112,7 @@ export function Testimonials() {
                 &ldquo;{reviews[currentIndex].quote}&rdquo;
               </motion.p>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#34312B]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#34312B]/40">
                 <div>
                   <h4 className="text-lg font-bold text-[#F3F0E8]">{reviews[currentIndex].author}</h4>
                   <p className="text-xs text-[#A8A39A]">
@@ -120,7 +120,7 @@ export function Testimonials() {
                   </p>
                 </div>
 
-                <div className="px-4 py-2 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] font-mono text-xs font-semibold w-fit">
+                <div className="px-4 py-2 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/20 text-[#C8A46B] font-mono text-xs font-semibold w-fit">
                   {reviews[currentIndex].metric}
                 </div>
               </div>

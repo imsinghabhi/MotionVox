@@ -51,14 +51,14 @@ export function Process() {
   ];
 
   return (
-    <section id="process" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B] overflow-hidden">
+    <section id="process" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]/40 overflow-hidden">
       {/* Glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Seamless Execution
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight mb-6">
@@ -81,14 +81,14 @@ export function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B] hover:border-[#C8A46B]/50 flex flex-col justify-between transition-all duration-300 shadow-lg transform-gpu"
+                className="group relative bg-[#201F1C] p-8 rounded-3xl border border-[#34312B]/40 hover:border-[#C8A46B]/40 flex flex-col justify-between transition-all duration-300 shadow-lg transform-gpu"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-2xl font-extrabold text-[#C8A46B]/40 group-hover:text-[#C8A46B] transition-colors">
                       {step.number}
                     </span>
-                    <div className="p-3.5 rounded-2xl bg-[#181715] border border-[#34312B] text-[#C8A46B] group-hover:scale-110 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-all shadow-md">
+                    <div className="p-3.5 rounded-2xl bg-[#181715] border border-[#34312B]/40 text-[#C8A46B] group-hover:scale-110 group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-all shadow-md">
                       <Icon className="w-6 h-6" />
                     </div>
                   </div>
@@ -101,7 +101,7 @@ export function Process() {
                   </p>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-[#34312B] flex items-center justify-between text-[10px] font-mono text-[#A8A39A]/60">
+                <div className="mt-8 pt-4 border-t border-[#34312B]/40 flex items-center justify-between text-[10px] font-mono text-[#A8A39A]/60">
                   <span>STAGE // {step.number}</span>
                   <span className="text-[#C8A46B]/90 uppercase">VERIFIED PIPELINE</span>
                 </div>

@@ -313,7 +313,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
                   el.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B] bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-all cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B]/40 bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/30 text-[#F3F0E8] transition-all cursor-pointer"
             >
               <span>Explore Services</span>
             </a>
@@ -351,7 +351,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
             ref={shrunkOverlayRef}
             className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#11100E] via-[#11100E]/80 to-transparent pointer-events-none opacity-0"
           >
-            <span className="px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
+            <span className="px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/20 text-[#C8A46B] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
               {reels[activeReelIndex].category}
             </span>
             <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#F3F0E8] tracking-tight drop-shadow-md">
@@ -369,7 +369,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           <div
             ref={leftCardRef}
             onClick={handlePrevReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B]/40 bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
             {/* Background Video */}
             <video
@@ -388,7 +388,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
               <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
                 {reels[prevIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B]/40 flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
                 <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
@@ -410,7 +410,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           <div
             ref={rightCardRef}
             onClick={handleNextReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B] bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B] transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B]/40 bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
             {/* Background Video */}
             <video
@@ -429,7 +429,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
               <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
                 {reels[nextIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B] flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B]/40 flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
                 <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
@@ -456,7 +456,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-[#34312B] flex flex-col items-center text-center bg-[#201F1C]/90 backdrop-blur-md hover:border-[#C8A46B]/40 transition-colors shadow-lg"
+              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-[#34312B]/40 flex flex-col items-center text-center bg-[#201F1C]/90 backdrop-blur-md hover:border-[#C8A46B]/30 transition-colors shadow-lg"
             >
               <stat.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8A46B] mb-0.5 sm:mb-1" />
               <span className="text-lg sm:text-2xl font-extrabold text-[#F3F0E8] tracking-tight">

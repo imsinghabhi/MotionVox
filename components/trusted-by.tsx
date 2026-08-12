@@ -16,7 +16,7 @@ export function TrustedBy() {
   ];
 
   return (
-    <section className="relative py-14 border-y border-[#34312B] bg-[#181715] overflow-hidden">
+    <section className="relative py-14 border-y border-[#34312B]/40 bg-[#181715] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 text-center mb-6">
         <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#A8A39A] flex items-center justify-center gap-2">
           <Sparkles className="w-3 h-3 text-[#C8A46B]" />
