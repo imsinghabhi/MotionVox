@@ -11,69 +11,73 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-black border-t border-white/10 pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-zinc-400">
+    <footer className="relative bg-[#11100E] border-t border-[#34312B] pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-[#A8A39A]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#34312B]">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 group-hover:border-sky-400/50 transition-colors overflow-hidden">
+            <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+              <div className="relative w-9 h-9 rounded-full border border-[#34312B] group-hover:border-[#C8A46B] transition-colors overflow-hidden shrink-0 shadow-md">
                 <Image
                   src="/IMG_3249.PNG"
                   alt="MotionVox Logo"
-                  width={28}
-                  height={28}
-                  className="object-contain filter brightness-125"
+                  fill
+                  className="object-cover filter brightness-110 group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <span className="font-bold tracking-tight text-white text-xl">
-                Motion<span className="text-sky-400">Vox</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-bold tracking-tight text-[#F3F0E8] text-xl leading-none group-hover:text-[#C8A46B] transition-colors">
+                  Motion<span>Vox</span>
+                </span>
+                <span className="text-[9px] uppercase tracking-widest text-[#A8A39A] font-medium leading-none mt-1">
+                  Creative Studio
+                </span>
+              </div>
             </Link>
 
-            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-[#A8A39A] max-w-sm leading-relaxed">
               Refined Media Solutions, Crafted with Expertise. Premium creative studio for neural dubbing, AI video avatars, and automated media production.
             </p>
 
             <div className="flex items-center gap-2 pt-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] font-mono text-zinc-400">All Neural Rendering Clusters Operational</span>
+              <span className="flex h-2 w-2 rounded-full bg-[#C8A46B] animate-pulse" />
+              <span className="text-[11px] font-mono text-[#A8A39A]">All Neural Rendering Clusters Operational</span>
             </div>
           </div>
 
           {/* Nav Column 1 */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold mb-4">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#F3F0E8] font-semibold mb-4">
               Services
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   Professional Dubbing
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   AI Video Avatars
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   Multimedia Production
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   Influencer Network
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   Custom Websites
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="#services" className="hover:text-[#F3F0E8] transition-colors">
                   Workflow Automation
                 </a>
               </li>
@@ -82,42 +86,42 @@ export function Footer() {
 
           {/* Nav Column 2 */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold mb-4">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#F3F0E8] font-semibold mb-4">
               Company
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors text-sky-400 font-medium">
+                <Link href="/blog" className="hover:text-[#F3F0E8] transition-colors text-[#C8A46B] font-medium">
                   Studio Journal (Blog)
                 </Link>
               </li>
               <li>
-                <a href="#why-us" className="hover:text-white transition-colors">
+                <a href="#why-us" className="hover:text-[#F3F0E8] transition-colors">
                   Why MotionVox
                 </a>
               </li>
               <li>
-                <a href="#featured-work" className="hover:text-white transition-colors">
+                <a href="#featured-work" className="hover:text-[#F3F0E8] transition-colors">
                   Featured Case Studies
                 </a>
               </li>
               <li>
-                <a href="#process" className="hover:text-white transition-colors">
+                <a href="#process" className="hover:text-[#F3F0E8] transition-colors">
                   Production Process
                 </a>
               </li>
               <li>
-                <a href="#testimonials" className="hover:text-white transition-colors">
+                <a href="#testimonials" className="hover:text-[#F3F0E8] transition-colors">
                   Client Reviews
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">
+                <a href="#contact" className="hover:text-[#F3F0E8] transition-colors">
                   Contact Studio
                 </a>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-white transition-colors text-neutral-400 font-mono text-[10px]">
+                <Link href="/admin" className="hover:text-[#F3F0E8] transition-colors text-[#A8A39A]/70 font-mono text-[10px]">
                   Admin Console
                 </Link>
               </li>
@@ -126,27 +130,27 @@ export function Footer() {
 
           {/* Nav Column 3 */}
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold mb-4">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#F3F0E8] font-semibold mb-4">
               Legal & Privacy
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
+                <span className="hover:text-[#F3F0E8] transition-colors cursor-pointer">
                   Privacy Policy
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
+                <span className="hover:text-[#F3F0E8] transition-colors cursor-pointer">
                   Terms of Service
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
+                <span className="hover:text-[#F3F0E8] transition-colors cursor-pointer">
                   Voice Rights & Licensing
                 </span>
               </li>
               <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
+                <span className="hover:text-[#F3F0E8] transition-colors cursor-pointer">
                   Security Architecture
                 </span>
               </li>
@@ -164,7 +168,7 @@ export function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="X / Twitter"
             >
               <Share2 className="w-3.5 h-3.5" />
@@ -174,7 +178,7 @@ export function Footer() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="LinkedIn"
             >
               <Globe className="w-3.5 h-3.5" />
@@ -184,7 +188,7 @@ export function Footer() {
               href="https://youtube.com"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+              className="p-2 rounded-full bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] transition-colors flex items-center gap-1"
               aria-label="YouTube"
             >
               <Video className="w-3.5 h-3.5" />
@@ -192,7 +196,7 @@ export function Footer() {
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-white/10 hover:bg-sky-500 hover:text-black text-white transition-all ml-2"
+              className="p-2 rounded-full bg-[#201F1C] border border-[#34312B] hover:bg-[#C8A46B] hover:text-[#11100E] text-[#F3F0E8] transition-all ml-2 cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />

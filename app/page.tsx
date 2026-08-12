@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex flex-col flex-1 min-h-screen bg-[#050505] overflow-x-hidden">
+    <main className="relative flex flex-col flex-1 min-h-screen bg-[#11100E] overflow-x-hidden">
       {/* 1. Floating Apple Glass Navbar */}
       <Navbar onOpenDemo={handleOpenDemo} />
 

@@ -82,7 +82,7 @@ export default function RootLayout({
     >
       <body
         suppressHydrationWarning
-        className="min-h-full flex flex-col bg-[#050505] text-white selection:bg-sky-500 selection:text-black bg-noise"
+        className="min-h-full flex flex-col bg-[#11100E] text-[#F3F0E8] selection:bg-[#C8A46B] selection:text-[#11100E] bg-noise"
       >
         <SEOSchema />
         <SmoothScrollProvider>

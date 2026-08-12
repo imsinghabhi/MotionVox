@@ -16,17 +16,17 @@ export function TrustedBy() {
   ];
 
   return (
-    <section className="relative py-14 border-y border-white/5 bg-black/60 backdrop-blur-md overflow-hidden">
+    <section className="relative py-14 border-y border-[#34312B] bg-[#181715] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 text-center mb-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500 flex items-center justify-center gap-2">
-          <Sparkles className="w-3 h-3 text-sky-400" />
+        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#A8A39A] flex items-center justify-center gap-2">
+          <Sparkles className="w-3 h-3 text-[#C8A46B]" />
           <span>Trusted by Leading Studios, SaaS Brands & Global Creators</span>
         </p>
       </div>
 
       {/* Fade Gradients on left and right */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#181715] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#181715] to-transparent z-10 pointer-events-none" />
 
       {/* Infinite Marquee Container */}
       <div className="flex overflow-hidden select-none">
@@ -36,12 +36,12 @@ export function TrustedBy() {
               key={idx}
               className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity cursor-pointer group"
             >
-              <div className="h-2 w-2 rounded-full bg-sky-400/40 group-hover:bg-sky-400 group-hover:shadow-[0_0_10px_rgba(56,189,248,0.8)] transition-all" />
+              <div className="h-2 w-2 rounded-full bg-[#C8A46B]/40 group-hover:bg-[#C8A46B] group-hover:shadow-[0_0_10px_rgba(200,164,107,0.6)] transition-all" />
               <div className="flex flex-col text-left">
-                <span className="text-sm font-bold tracking-wider text-zinc-300 group-hover:text-white font-mono transition-colors">
+                <span className="text-sm font-bold tracking-wider text-[#A8A39A] group-hover:text-[#F3F0E8] font-mono transition-colors">
                   {item.name}
                 </span>
-                <span className="text-[10px] text-zinc-500 group-hover:text-zinc-400">
+                <span className="text-[10px] text-[#A8A39A]/70 group-hover:text-[#A8A39A]">
                   {item.desc}
                 </span>
               </div>

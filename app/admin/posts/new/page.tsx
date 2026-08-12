@@ -101,26 +101,26 @@ export default function NewPostPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#11100E] text-[#F3F0E8] flex flex-col font-sans">
       {/* Top Bar */}
-      <header className="border-b border-neutral-800 bg-black/60 backdrop-blur-xl sticky top-0 z-40">
+      <header className="border-b border-[#34312B] bg-[#181715] sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
             href="/admin"
-            className="flex items-center gap-2 text-xs font-medium text-neutral-400 hover:text-white transition-colors"
+            className="flex items-center gap-2 text-xs font-medium text-[#A8A39A] hover:text-[#F3F0E8] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Dashboard
           </Link>
 
           <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 text-xs text-neutral-300 cursor-pointer bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-lg">
+            <label className="flex items-center gap-2 text-xs text-[#F3F0E8] cursor-pointer bg-[#201F1C] border border-[#34312B] px-3 py-1.5 rounded-lg">
               <input
                 type="checkbox"
                 checked={formData.isPublished}
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, isPublished: e.target.checked }))
                 }
-                className="accent-sky-500 rounded cursor-pointer"
+                className="accent-[#C8A46B] rounded cursor-pointer"
               />
               <span>{formData.isPublished ? "Publish Immediately" : "Save as Draft"}</span>
             </label>
@@ -128,10 +128,10 @@ export default function NewPostPage() {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-medium text-xs shadow-lg shadow-sky-500/20 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] font-semibold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
             >
               {loading ? (
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-[#11100E]/30 border-t-[#11100E] rounded-full animate-spin" />
               ) : (
                 <>
                   <Save className="w-4 h-4" /> Save Article
@@ -145,11 +145,11 @@ export default function NewPostPage() {
       {/* Main Form Container */}
       <main className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-[#F3F0E8] flex items-center gap-2">
             Create New Studio Article
-            <Sparkles className="w-5 h-5 text-sky-400" />
+            <Sparkles className="w-5 h-5 text-[#C8A46B]" />
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">
+          <p className="text-xs text-[#A8A39A] mt-1">
             Write content that elevates MotionVox brand authority.
           </p>
         </div>
@@ -159,7 +159,7 @@ export default function NewPostPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Title */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] mb-2 font-mono">
                 Article Title
               </label>
               <input
@@ -168,14 +168,14 @@ export default function NewPostPage() {
                 onChange={handleTitleChange}
                 placeholder="e.g., The Future of Neural Dubbing at Scale"
                 required
-                className="w-full px-4 py-3 rounded-xl bg-neutral-900/80 border border-neutral-800 text-lg font-semibold text-white placeholder-neutral-500 focus:outline-none focus:border-sky-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-lg font-semibold text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-all"
               />
             </div>
 
             {/* Slug */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2 flex items-center gap-1.5">
-                <Globe className="w-3.5 h-3.5 text-neutral-400" /> URL Slug
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] mb-2 font-mono flex items-center gap-1.5">
+                <Globe className="w-3.5 h-3.5 text-[#A8A39A]" /> URL Slug
               </label>
               <input
                 type="text"
@@ -185,13 +185,13 @@ export default function NewPostPage() {
                 }
                 placeholder="url-friendly-slug"
                 required
-                className="w-full px-4 py-2.5 rounded-xl bg-neutral-900/50 border border-neutral-800 text-xs font-mono text-neutral-300 placeholder-neutral-500 focus:outline-none focus:border-sky-500 transition-all"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#201F1C] border border-[#34312B] text-xs font-mono text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-all"
               />
             </div>
 
             {/* Excerpt */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] mb-2 font-mono">
                 Short Excerpt / Abstract
               </label>
               <textarea
@@ -201,21 +201,21 @@ export default function NewPostPage() {
                   setFormData((prev) => ({ ...prev, excerpt: e.target.value }))
                 }
                 placeholder="A compelling 1-2 sentence summary of this post..."
-                className="w-full px-4 py-3 rounded-xl bg-neutral-900/80 border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-sky-500 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[#201F1C] border border-[#34312B] text-xs text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-all"
               />
             </div>
 
             {/* Content Editor Tabs (Write / Preview) */}
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900/60 overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 bg-black/40 border-b border-neutral-800">
+            <div className="rounded-2xl border border-[#34312B] bg-[#201F1C] overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 bg-[#181715] border-b border-[#34312B]">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setActiveTab("write")}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTab === "write"
-                        ? "bg-sky-500 text-white"
-                        : "text-neutral-400 hover:text-white"
+                        ? "bg-[#C8A46B] text-[#11100E] font-semibold"
+                        : "text-[#A8A39A] hover:text-[#F3F0E8]"
                     }`}
                   >
                     <FileEdit className="w-3.5 h-3.5" /> Editor
@@ -225,14 +225,14 @@ export default function NewPostPage() {
                     onClick={() => setActiveTab("preview")}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTab === "preview"
-                        ? "bg-sky-500 text-white"
-                        : "text-neutral-400 hover:text-white"
+                        ? "bg-[#C8A46B] text-[#11100E] font-semibold"
+                        : "text-[#A8A39A] hover:text-[#F3F0E8]"
                     }`}
                   >
                     <Eye className="w-3.5 h-3.5" /> Live Preview
                   </button>
                 </div>
-                <span className="text-[10px] text-neutral-500 font-mono">
+                <span className="text-[10px] text-[#A8A39A]/70 font-mono">
                   Supports Markdown format
                 </span>
               </div>
@@ -246,22 +246,22 @@ export default function NewPostPage() {
                   }
                   placeholder="Write your article content using Markdown format (## Headings, **bold**, lists, > quotes)..."
                   required
-                  className="w-full p-4 bg-transparent text-sm font-mono text-neutral-200 placeholder-neutral-600 focus:outline-none resize-y min-h-[350px]"
+                  className="w-full p-4 bg-transparent text-sm font-mono text-[#F3F0E8] placeholder-[#A8A39A]/40 focus:outline-none resize-y min-h-[350px]"
                 />
               ) : (
-                <div className="p-6 text-sm text-neutral-300 min-h-[350px] prose prose-invert max-w-none space-y-4">
+                <div className="p-6 text-sm text-[#A8A39A] min-h-[350px] prose prose-invert max-w-none space-y-4">
                   {formData.content ? (
                     formData.content.split("\n\n").map((paragraph, idx) => {
                       if (paragraph.startsWith("## ")) {
                         return (
-                          <h2 key={idx} className="text-xl font-bold text-white mt-4 mb-2">
+                          <h2 key={idx} className="text-xl font-bold text-[#F3F0E8] mt-4 mb-2">
                             {paragraph.replace("## ", "")}
                           </h2>
                         );
                       }
                       if (paragraph.startsWith("### ")) {
                         return (
-                          <h3 key={idx} className="text-lg font-semibold text-sky-400 mt-3 mb-1">
+                          <h3 key={idx} className="text-lg font-semibold text-[#C8A46B] mt-3 mb-1">
                             {paragraph.replace("### ", "")}
                           </h3>
                         );
@@ -270,16 +270,16 @@ export default function NewPostPage() {
                         return (
                           <blockquote
                             key={idx}
-                            className="border-l-2 border-sky-500 pl-4 italic text-neutral-400 my-4"
+                            className="border-l-2 border-[#C8A46B] pl-4 italic text-[#A8A39A] my-4"
                           >
                             {paragraph.replace("> ", "")}
                           </blockquote>
                         );
                       }
-                      return <p key={idx} className="text-neutral-300 leading-relaxed">{paragraph}</p>;
+                      return <p key={idx} className="text-[#A8A39A] leading-relaxed">{paragraph}</p>;
                     })
                   ) : (
-                    <p className="text-xs text-neutral-500 italic">
+                    <p className="text-xs text-[#A8A39A]/60 italic">
                       Nothing to preview yet. Switch to the Editor tab and start typing!
                     </p>
                   )}
@@ -291,9 +291,9 @@ export default function NewPostPage() {
           {/* Right Meta Column (1 col) */}
           <div className="space-y-6">
             {/* Cover Image URL */}
-            <div className="p-5 rounded-2xl bg-neutral-900/50 border border-neutral-800 space-y-4">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
-                <ImageIcon className="w-3.5 h-3.5 text-sky-400" /> Cover Image URL
+            <div className="p-5 rounded-2xl bg-[#201F1C] border border-[#34312B] space-y-4 shadow-md">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] font-mono flex items-center gap-1.5">
+                <ImageIcon className="w-3.5 h-3.5 text-[#C8A46B]" /> Cover Image URL
               </label>
               <input
                 type="url"
@@ -302,10 +302,10 @@ export default function NewPostPage() {
                   setFormData((prev) => ({ ...prev, coverImage: e.target.value }))
                 }
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 rounded-xl bg-black/50 border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-sky-500"
+                className="w-full px-3 py-2 rounded-xl bg-[#181715] border border-[#34312B] text-xs text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]"
               />
               {formData.coverImage && (
-                <div className="mt-2 rounded-xl overflow-hidden border border-neutral-800 aspect-video relative">
+                <div className="mt-2 rounded-xl overflow-hidden border border-[#34312B] aspect-video relative">
                   <img
                     src={formData.coverImage}
                     alt="Cover preview"
@@ -316,49 +316,49 @@ export default function NewPostPage() {
             </div>
 
             {/* Author Settings */}
-            <div className="p-5 rounded-2xl bg-neutral-900/50 border border-neutral-800 space-y-4">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-sky-400" /> Author Profile
+            <div className="p-5 rounded-2xl bg-[#201F1C] border border-[#34312B] space-y-4 shadow-md">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] font-mono flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-[#C8A46B]" /> Author Profile
               </label>
               <div>
-                <label className="block text-[10px] text-neutral-400 mb-1">Author Name</label>
+                <label className="block text-[10px] text-[#A8A39A] mb-1 font-mono">Author Name</label>
                 <input
                   type="text"
                   value={formData.authorName}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, authorName: e.target.value }))
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-black/50 border border-neutral-800 text-xs text-white focus:outline-none focus:border-sky-500"
+                  className="w-full px-3 py-2 rounded-xl bg-[#181715] border border-[#34312B] text-xs text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-neutral-400 mb-1">Author Role</label>
+                <label className="block text-[10px] text-[#A8A39A] mb-1 font-mono">Author Role</label>
                 <input
                   type="text"
                   value={formData.authorRole}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, authorRole: e.target.value }))
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-black/50 border border-neutral-800 text-xs text-white focus:outline-none focus:border-sky-500"
+                  className="w-full px-3 py-2 rounded-xl bg-[#181715] border border-[#34312B] text-xs text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-neutral-400 mb-1">Avatar Image URL</label>
+                <label className="block text-[10px] text-[#A8A39A] mb-1 font-mono">Avatar Image URL</label>
                 <input
                   type="url"
                   value={formData.authorAvatar}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, authorAvatar: e.target.value }))
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-black/50 border border-neutral-800 text-xs text-white focus:outline-none focus:border-sky-500"
+                  className="w-full px-3 py-2 rounded-xl bg-[#181715] border border-[#34312B] text-xs text-[#F3F0E8] focus:outline-none focus:border-[#C8A46B]"
                 />
               </div>
             </div>
 
             {/* Tags */}
-            <div className="p-5 rounded-2xl bg-neutral-900/50 border border-neutral-800 space-y-3">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-sky-400" /> Categories / Tags
+            <div className="p-5 rounded-2xl bg-[#201F1C] border border-[#34312B] space-y-3 shadow-md">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#A8A39A] font-mono flex items-center gap-1.5">
+                <Tag className="w-3.5 h-3.5 text-[#C8A46B]" /> Categories / Tags
               </label>
               <input
                 type="text"
@@ -367,9 +367,9 @@ export default function NewPostPage() {
                   setFormData((prev) => ({ ...prev, tags: e.target.value }))
                 }
                 placeholder="Comma separated: AI, Neural Dubbing, SaaS"
-                className="w-full px-3 py-2 rounded-xl bg-black/50 border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-sky-500"
+                className="w-full px-3 py-2 rounded-xl bg-[#181715] border border-[#34312B] text-xs text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B]"
               />
-              <p className="text-[10px] text-neutral-500">Separate multiple tags with commas.</p>
+              <p className="text-[10px] text-[#A8A39A]/70">Separate multiple tags with commas.</p>
             </div>
           </div>
         </form>

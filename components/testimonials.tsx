@@ -55,18 +55,18 @@ export function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-black">
+    <section id="testimonials" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#11100E]">
       {/* Ambient background glow */}
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-wider text-sky-400 mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
               <Sparkles className="w-3.5 h-3.5" /> Client Proof
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight">
               Validated by Leaders, <br />
               <span className="text-silver-gradient">Loved by Creators.</span>
             </h2>
@@ -75,14 +75,14 @@ export function Testimonials() {
           <div className="flex items-center gap-3">
             <button
               onClick={prevReview}
-              className="p-3.5 rounded-full glass-button border border-white/10 hover:border-white/30 text-white"
+              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B] hover:border-[#C8A46B] text-[#F3F0E8] transition-colors"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextReview}
-              className="p-3.5 rounded-full glass-button border border-white/10 hover:border-white/30 text-white"
+              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B] hover:border-[#C8A46B] text-[#F3F0E8] transition-colors"
               aria-label="Next Testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -91,14 +91,14 @@ export function Testimonials() {
         </div>
 
         {/* Featured Testimonial Card */}
-        <div className="relative rounded-3xl p-1 bg-gradient-to-b from-white/15 via-white/5 to-transparent shadow-2xl overflow-hidden">
-          <div className="relative rounded-[22px] bg-zinc-950 p-8 sm:p-12 border border-white/10 overflow-hidden backdrop-blur-xl">
-            <Quote className="w-16 h-16 text-sky-400/15 absolute top-6 right-8 pointer-events-none" />
+        <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B] shadow-2xl overflow-hidden">
+          <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-12 border border-[#34312B] overflow-hidden">
+            <Quote className="w-16 h-16 text-[#C8A46B]/15 absolute top-6 right-8 pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl">
-              <div className="flex items-center gap-1 text-sky-400 mb-6">
+              <div className="flex items-center gap-1 text-[#C8A46B] mb-6">
                 {[...Array(reviews[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-sky-400" />
+                  <Star key={i} className="w-4 h-4 fill-[#C8A46B] text-[#C8A46B]" />
                 ))}
               </div>
 
@@ -107,20 +107,20 @@ export function Testimonials() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-xl sm:text-3xl font-medium text-white leading-relaxed mb-8 text-balance"
+                className="text-xl sm:text-3xl font-medium text-[#F3F0E8] leading-relaxed mb-8 text-balance"
               >
                 &ldquo;{reviews[currentIndex].quote}&rdquo;
               </motion.p>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#34312B]">
                 <div>
-                  <h4 className="text-lg font-bold text-white">{reviews[currentIndex].author}</h4>
-                  <p className="text-xs text-zinc-400">
-                    {reviews[currentIndex].role} — <span className="text-sky-300">{reviews[currentIndex].company}</span>
+                  <h4 className="text-lg font-bold text-[#F3F0E8]">{reviews[currentIndex].author}</h4>
+                  <p className="text-xs text-[#A8A39A]">
+                    {reviews[currentIndex].role} — <span className="text-[#C8A46B]">{reviews[currentIndex].company}</span>
                   </p>
                 </div>
 
-                <div className="px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 font-mono text-xs font-semibold w-fit">
+                <div className="px-4 py-2 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B] font-mono text-xs font-semibold w-fit">
                   {reviews[currentIndex].metric}
                 </div>
               </div>

@@ -2,15 +2,14 @@
 
 @layer base {
   :root {
-    --bg-primary: #050505;
-    --bg-surface: #0d0d0d;
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-hover: rgba(255, 255, 255, 0.18);
-    --text-primary: #ffffff;
-    --text-secondary: #b5b5b5;
-    --accent-ice: #38bdf8;
-    --accent-glow: rgba(56, 189, 248, 0.15);
+    --bg-primary: #11100E;
+    --bg-surface: #181715;
+    --bg-card: #201F1C;
+    --text-primary: #F3F0E8;
+    --text-secondary: #A8A39A;
+    --accent: #C8A46B;
+    --accent-hover: #D8B982;
+    --border: #34312B;
   }
 
   html {
@@ -32,74 +31,70 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #050505;
+    background: #11100E;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1f1f24;
+    background: #34312B;
     border-radius: 4px;
-    border: 2px solid #050505;
+    border: 2px solid #11100E;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #38bdf8;
+    background: #C8A46B;
   }
 }
 
-/* Glassmorphism Classes */
+/* Studio Theme Card & Surface Classes */
 .glass-panel {
-  background: rgba(13, 13, 13, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: #181715;
+  border: 1px solid #34312B;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  background: #201F1C;
+  border: 1px solid #34312B;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(56, 189, 248, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.12);
+  background: #252320;
+  border-color: rgba(200, 164, 107, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
   transform: translateY(-3px);
 }
 
 .glass-nav {
-  background: rgba(5, 5, 5, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 16, 14, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #34312B;
 }
 
 .glass-button {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: #201F1C;
+  border: 1px solid #34312B;
+  color: #F3F0E8;
   transition: all 0.3s ease;
 }
 
 .glass-button:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  background: #292723;
+  border-color: rgba(200, 164, 107, 0.4);
+  color: #ffffff;
 }
 
 .ice-glow-button {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: #ffffff;
-  box-shadow: 0 0 25px rgba(14, 165, 233, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: #C8A46B;
+  color: #11100E;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(200, 164, 107, 0.2);
   transition: all 0.3s ease;
 }
 
 .ice-glow-button:hover {
-  box-shadow: 0 0 40px rgba(56, 189, 248, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  background: #D8B982;
+  box-shadow: 0 6px 25px rgba(200, 164, 107, 0.35);
   transform: translateY(-1px);
 }
 
@@ -107,8 +102,8 @@
 .bg-mesh-grid {
   background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(52, 49, 43, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 49, 43, 0.15) 1px, transparent 1px);
 }
 
 .bg-noise {
@@ -117,17 +112,17 @@
 
 /* Text glow & gradients */
 .text-ice-glow {
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  text-shadow: 0 0 20px rgba(200, 164, 107, 0.3);
 }
 
 .text-silver-gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(180deg, #F3F0E8 0%, #A8A39A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-ice-gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #7dd3fc 60%, #38bdf8 100%);
+  background: linear-gradient(180deg, #F3F0E8 0%, #D8B982 60%, #C8A46B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

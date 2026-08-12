@@ -45,17 +45,17 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-zinc-950 border-t border-white/5">
+    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-wider text-sky-400 mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B] text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Got Questions?
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base">
+          <p className="text-[#A8A39A] text-sm sm:text-base">
             Everything you need to know about our dubbing, AI avatars, web engineering, and media workflows.
           </p>
         </div>
@@ -67,14 +67,14 @@ export function FAQ() {
             return (
               <div
                 key={idx}
-                className="glass-card rounded-2xl border border-white/10 overflow-hidden transition-colors"
+                className="bg-[#201F1C] rounded-2xl border border-[#34312B] overflow-hidden transition-colors shadow-md"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-white text-base sm:text-lg hover:text-sky-300 transition-colors focus:outline-none"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-[#F3F0E8] text-base sm:text-lg hover:text-[#C8A46B] transition-colors focus:outline-none cursor-pointer"
                 >
                   <span>{faq.question}</span>
-                  <div className="p-2 rounded-full bg-white/5 text-sky-400 shrink-0">
+                  <div className="p-2 rounded-full bg-[#181715] text-[#C8A46B] border border-[#34312B] shrink-0">
                     {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                   </div>
                 </button>
@@ -88,7 +88,7 @@ export function FAQ() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 pt-2 text-sm text-zinc-400 leading-relaxed border-t border-white/5">
+                      <div className="px-6 pb-6 pt-2 text-sm text-[#A8A39A] leading-relaxed border-t border-[#34312B]">
                         {faq.answer}
                       </div>
                     </motion.div>

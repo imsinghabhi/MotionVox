@@ -53,23 +53,23 @@ export default function PublicBlogPage() {
   const regularPosts = filteredPosts.slice(1);
 
   return (
-    <main className="relative flex flex-col flex-1 min-h-screen bg-[#050505] overflow-x-hidden text-white">
+    <main className="relative flex flex-col flex-1 min-h-screen bg-[#11100E] overflow-x-hidden text-[#F3F0E8]">
       <Navbar onOpenDemo={() => setIsDemoModalOpen(true)} />
 
       {/* Hero Header Section */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C8A46B]/5 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-mono font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B] text-[#C8A46B] text-xs font-mono font-medium">
             <Sparkles className="w-3.5 h-3.5" /> Insights & Intelligence
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            MotionVox <span className="bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">Journal</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#F3F0E8] leading-tight">
+            MotionVox <span className="text-silver-gradient">Journal</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#A8A39A] max-w-2xl mx-auto font-light leading-relaxed">
             Deep dives into AI neural dubbing, photorealistic avatars, luxury creative workflows, and video automation at enterprise scale.
           </p>
         </div>
@@ -77,13 +77,13 @@ export default function PublicBlogPage() {
         {/* Search & Tag Filter Controls */}
         <div className="mt-12 max-w-3xl mx-auto space-y-6">
           <div className="relative">
-            <Search className="w-5 h-5 text-neutral-500 absolute left-4 top-1/2 -translate-y-1/2" />
+            <Search className="w-5 h-5 text-[#A8A39A]/60 absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search articles by keyword or topic..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-neutral-900/80 border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all backdrop-blur-xl shadow-xl"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#181715] border border-[#34312B] text-sm text-[#F3F0E8] placeholder-[#A8A39A]/50 focus:outline-none focus:border-[#C8A46B] transition-all shadow-xl"
             />
           </div>
 
@@ -96,8 +96,8 @@ export default function PublicBlogPage() {
                   onClick={() => setSelectedTag(tag)}
                   className={`px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     selectedTag === tag
-                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/25"
-                      : "bg-neutral-900/60 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
+                      ? "bg-[#C8A46B] text-[#11100E] shadow-md font-semibold"
+                      : "bg-[#181715] border border-[#34312B] text-[#A8A39A] hover:text-[#F3F0E8] hover:border-[#C8A46B]/40"
                   }`}
                 >
                   {tag}
@@ -112,14 +112,14 @@ export default function PublicBlogPage() {
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-24 space-y-12">
         {loading ? (
           <div className="py-24 text-center space-y-4">
-            <div className="w-10 h-10 border-2 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-sm text-neutral-400 font-mono">Curating journal articles...</p>
+            <div className="w-10 h-10 border-2 border-[#C8A46B] border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-sm text-[#A8A39A] font-mono">Curating journal articles...</p>
           </div>
         ) : filteredPosts.length === 0 ? (
-          <div className="py-24 text-center rounded-3xl bg-neutral-900/40 border border-neutral-800/80 p-12">
-            <Newspaper className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
-            <h3 className="text-lg font-bold text-white">No journal articles found</h3>
-            <p className="text-xs text-neutral-400 mt-1">
+          <div className="py-24 text-center rounded-3xl bg-[#181715] border border-[#34312B] p-12">
+            <Newspaper className="w-12 h-12 text-[#A8A39A]/40 mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-[#F3F0E8]">No journal articles found</h3>
+            <p className="text-xs text-[#A8A39A] mt-1">
               Try adjusting your search criteria or selecting a different category tag.
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function PublicBlogPage() {
             {/* Featured Article */}
             {featuredPost && (
               <div className="space-y-4">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 font-mono">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-[#A8A39A] font-mono">
                   Featured Lead Article
                 </h2>
                 <BlogCard post={featuredPost} featured={true} />
@@ -138,7 +138,7 @@ export default function PublicBlogPage() {
             {/* Grid Articles */}
             {regularPosts.length > 0 && (
               <div className="space-y-4 pt-6">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 font-mono">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-[#A8A39A] font-mono">
                   Latest Articles ({regularPosts.length})
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
