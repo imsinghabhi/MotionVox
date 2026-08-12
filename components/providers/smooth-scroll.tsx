@@ -36,7 +36,31 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     // Enable lag smoothing to prevent stutter on frame dips
     gsap.ticker.lagSmoothing(500, 33);
 
+    // Watch for DOM scroll height changes (async data loading, blog posts, dynamic sections)
+    let lastHeight = document.body ? document.body.scrollHeight : 0;
+    const checkHeightAndResize = () => {
+      if (document.body) {
+        const currentHeight = document.body.scrollHeight;
+        if (currentHeight !== lastHeight) {
+          lastHeight = currentHeight;
+          lenis.resize();
+        }
+      }
+    };
+
+    const mutationObserver = new MutationObserver(checkHeightAndResize);
+    if (document.body) {
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
+    }
+
+    const handleWindowResize = () => {
+      lenis.resize();
+    };
+    window.addEventListener("resize", handleWindowResize);
+
     return () => {
+      mutationObserver.disconnect();
+      window.removeEventListener("resize", handleWindowResize);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };

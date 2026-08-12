@@ -36,6 +36,15 @@ export default function PublicBlogPage() {
     loadPosts();
   }, []);
 
+  useEffect(() => {
+    if (!loading) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, posts]);
+
   const allTags = ["All", ...Array.from(new Set(posts.flatMap((p) => p.tags)))];
 
   const filteredPosts = posts.filter((post) => {
