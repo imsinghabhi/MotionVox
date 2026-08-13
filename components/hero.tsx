@@ -95,20 +95,23 @@ export function Hero({ onOpenDemo }: HeroProps) {
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-      const scrollEnd = isMobile ? "+=75%" : isTablet ? "+=120%" : "+=160%";
+      const scrollEnd = isMobile ? "+=70%" : isTablet ? "+=110%" : "+=150%";
 
       // Master scroll-driven timeline pinned to the viewport
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: scrollEnd, // Fast responsive scroll distance for mobile & tablet
+          end: scrollEnd, // Responsive scroll distance for mobile & tablet
           pin: true,
           pinSpacing: true,
-          scrub: isMobile ? 0.3 : 0.5,
+          anticipatePin: 1, // Eliminates pin jump on touch devices when scrolling up
+          scrub: isMobile ? 0.2 : 0.4,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (self.progress > 0.2) {
+            if (self.progress > 0.15) {
               setIsShrunk(true);
             } else {
               setIsShrunk(false);
@@ -125,15 +128,14 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // ---------------------------------------------------------------------
       // PHASE 1 (0.00 -> 0.25): Hero Starts Shrinking
       // ---------------------------------------------------------------------
-      // 1a. Hero main text overlay dissolves out cleanly with autoAlpha
+      // 1a. Hero main text overlay dissolves out smoothly
       tl.to(
         textContainerRef.current,
         {
           opacity: 0,
-          autoAlpha: 0,
-          y: -40,
-          scale: 0.96,
-          ease: "power1.inOut",
+          y: -30,
+          scale: 0.97,
+          ease: "none",
           duration: 0.25,
         },
         0
@@ -148,7 +150,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           borderRadius: isMobile ? "20px" : "32px",
           boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
           borderColor: "rgba(39, 39, 42, 1)",
-          ease: "power2.inOut",
+          ease: "none",
           duration: 0.50,
         },
         0
@@ -156,13 +158,12 @@ export function Hero({ onOpenDemo }: HeroProps) {
 
       // 1c. Inner card title overlay (for shrunk state) fades in on central video card
       if (shrunkOverlayRef.current) {
-        tl.fromTo(
+        tl.to(
           shrunkOverlayRef.current,
-          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            ease: "power2.out",
+            ease: "none",
             duration: 0.25,
           },
           0.20
@@ -173,40 +174,34 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // PHASE 2 (0.25 -> 0.55): Carousel Cards Reveal & Slide In
       // ---------------------------------------------------------------------
       // Left Card: PREVIOUS REEL
-      tl.fromTo(
-        leftCardRef.current,
-        {
-          opacity: 0,
-          x: -sideCardXOffset,
-          scale: 0.82,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          ease: "power2.out",
-          duration: 0.30,
-        },
-        0.25
-      );
+      if (leftCardRef.current) {
+        tl.to(
+          leftCardRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            ease: "none",
+            duration: 0.30,
+          },
+          0.25
+        );
+      }
 
       // Right Card: NEXT REEL
-      tl.fromTo(
-        rightCardRef.current,
-        {
-          opacity: 0,
-          x: sideCardXOffset,
-          scale: 0.82,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          ease: "power2.out",
-          duration: 0.30,
-        },
-        0.25
-      );
+      if (rightCardRef.current) {
+        tl.to(
+          rightCardRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            ease: "none",
+            duration: 0.30,
+          },
+          0.25
+        );
+      }
 
       // ---------------------------------------------------------------------
       // PHASE 3 (0.55 -> 0.75): Carousel Completely Established & Visible
@@ -215,22 +210,19 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // ---------------------------------------------------------------------
       // PHASE 4 (0.75 -> 0.90): Statistics Section Reveal
       // ---------------------------------------------------------------------
-      tl.fromTo(
-        statsRef.current,
-        {
-          opacity: 0,
-          y: 40,
-          scale: 0.95,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          ease: "power2.out",
-          duration: 0.15,
-        },
-        0.75
-      );
+      if (statsRef.current) {
+        tl.to(
+          statsRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "none",
+            duration: 0.15,
+          },
+          0.75
+        );
+      }
 
       // ---------------------------------------------------------------------
       // PHASE 5 (0.90 -> 1.00): Exit Hero / Complete Sequence & Unpin
