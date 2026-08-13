@@ -353,8 +353,8 @@ export function Hero({ onOpenDemo }: HeroProps) {
                   {reels[activeReelIndex].sub}
                 </p>
 
-                {/* Reel Navigation Dots & Controls */}
-                <div className="flex items-center gap-3 mt-3">
+                {/* Reel Navigation Dots & Controls (Desktop Only) */}
+                <div className="hidden lg:flex items-center gap-3 mt-3">
                   <button
                     type="button"
                     onClick={handlePrevReel}
@@ -397,13 +397,13 @@ export function Hero({ onOpenDemo }: HeroProps) {
           </div>
         </div>
 
-        {/* 3. CAROUSEL SIDE CARDS (Phase 2 & 3 - Slide & Fade In) */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-50 flex items-center justify-between px-2 sm:px-6 md:px-12 pointer-events-none w-full max-w-7xl mx-auto">
+        {/* 3. CAROUSEL SIDE CARDS (Desktop Only - lg:flex) */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-50 hidden lg:flex items-center justify-between px-6 md:px-12 pointer-events-none w-full max-w-7xl mx-auto">
           {/* Left Card: PREVIOUS REEL */}
           <div
             ref={leftCardRef}
             onClick={handlePrevReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-64 lg:w-76 h-72 lg:h-80 rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-5 md:p-6 opacity-0"
           >
             {/* Background Image Thumbnail (Optimized GPU render) */}
             <img
@@ -414,22 +414,22 @@ export function Hero({ onOpenDemo }: HeroProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
 
             <div className="relative z-10 flex items-center justify-between">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
+              <span className="text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
                 {reels[prevIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
-                <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <div className="w-8 h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
+                <ChevronLeft className="w-4 h-4" />
               </div>
             </div>
 
-            <div className="relative z-10 text-left space-y-0.5 sm:space-y-1">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#A1A1AA]/70 font-semibold block">
+            <div className="relative z-10 text-left space-y-1">
+              <span className="text-[10px] uppercase font-mono text-[#A1A1AA]/70 font-semibold block">
                 PREVIOUS REEL
               </span>
-              <h4 className="text-xs sm:text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+              <h4 className="text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-2 drop-shadow-md">
                 {reels[prevIndex].headline}
               </h4>
-              <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] line-clamp-1 hidden sm:block drop-shadow">
+              <p className="text-[11px] text-[#A1A1AA] line-clamp-1 drop-shadow">
                 {reels[prevIndex].sub}
               </p>
             </div>
@@ -439,7 +439,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           <div
             ref={rightCardRef}
             onClick={handleNextReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-64 lg:w-76 h-72 lg:h-80 rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-5 md:p-6 opacity-0"
           >
             {/* Background Image Thumbnail (Optimized GPU render) */}
             <img
@@ -450,22 +450,22 @@ export function Hero({ onOpenDemo }: HeroProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
 
             <div className="relative z-10 flex items-center justify-between">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
+              <span className="text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
                 {reels[nextIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
-                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <div className="w-8 h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
+                <ChevronRight className="w-4 h-4" />
               </div>
             </div>
 
-            <div className="relative z-10 text-right space-y-0.5 sm:space-y-1">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold block">
+            <div className="relative z-10 text-right space-y-1">
+              <span className="text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold block">
                 NEXT REEL
               </span>
-              <h4 className="text-xs sm:text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+              <h4 className="text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-2 drop-shadow-md">
                 {reels[nextIndex].headline}
               </h4>
-              <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] line-clamp-1 hidden sm:block drop-shadow">
+              <p className="text-[11px] text-[#A1A1AA] line-clamp-1 drop-shadow">
                 {reels[nextIndex].sub}
               </p>
             </div>
