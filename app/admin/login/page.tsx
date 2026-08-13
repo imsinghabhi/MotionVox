@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Lock, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ProgressiveLogo } from "@/components/progressive-logo";
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
@@ -45,11 +46,14 @@ export default function AdminLoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo / Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 flex flex-col items-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-[#FAFAFA] hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-3 text-2xl font-bold tracking-tight text-[#FAFAFA] hover:opacity-90 transition-opacity mb-2"
           >
+            <div className="relative w-9 h-9 rounded-full border border-[#27272A] overflow-hidden shrink-0 shadow-md flex items-center justify-center bg-black">
+              <ProgressiveLogo />
+            </div>
             <span>
               Motion<span className="text-[#E2E8F0]">Vox</span>
             </span>

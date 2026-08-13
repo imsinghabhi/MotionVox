@@ -18,6 +18,7 @@ import {
   ArrowUpRight,
   RefreshCw,
 } from "lucide-react";
+import { ProgressiveLogo } from "@/components/progressive-logo";
 
 export default function AdminDashboardPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -124,7 +125,10 @@ export default function AdminDashboardPage() {
       <header className="border-b border-[#27272A] bg-[#141414] sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="group flex items-center gap-2">
+            <Link href="/" className="group flex items-center gap-2.5">
+              <div className="relative w-8 h-8 rounded-full border border-[#27272A] group-hover:border-[#E2E8F0] transition-colors overflow-hidden shrink-0 shadow-md flex items-center justify-center bg-black">
+                <ProgressiveLogo />
+              </div>
               <span className="font-bold text-xl tracking-tight text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors">
                 Motion<span className="text-[#E2E8F0]">Vox</span>
               </span>

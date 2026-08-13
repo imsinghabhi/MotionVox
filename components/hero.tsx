@@ -95,16 +95,17 @@ export function Hero({ onOpenDemo }: HeroProps) {
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const scrollEnd = isMobile ? "+=75%" : isTablet ? "+=120%" : "+=160%";
 
       // Master scroll-driven timeline pinned to the viewport
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=320%", // Generous scroll space for cinematic sequence
+          end: scrollEnd, // Fast responsive scroll distance for mobile & tablet
           pin: true,
           pinSpacing: true,
-          scrub: 0.6,
+          scrub: isMobile ? 0.3 : 0.5,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (self.progress > 0.2) {
@@ -117,9 +118,9 @@ export function Hero({ onOpenDemo }: HeroProps) {
       });
 
       // Target video card shrink dimensions based on device size
-      const targetWidth = isMobile ? "88vw" : isTablet ? "68vw" : "58vw";
-      const targetHeight = isMobile ? "40vh" : isTablet ? "50vh" : "54vh";
-      const sideCardXOffset = isMobile ? 40 : isTablet ? 80 : 120;
+      const targetWidth = isMobile ? "88vw" : isTablet ? "70vw" : "58vw";
+      const targetHeight = isMobile ? "36vh" : isTablet ? "46vh" : "54vh";
+      const sideCardXOffset = isMobile ? 15 : isTablet ? 50 : 120;
 
       // ---------------------------------------------------------------------
       // PHASE 1 (0.00 -> 0.25): Hero Starts Shrinking
@@ -146,7 +147,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           height: targetHeight,
           borderRadius: isMobile ? "20px" : "32px",
           boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
-          borderColor: "rgba(52, 49, 43, 1)",
+          borderColor: "rgba(39, 39, 42, 1)",
           ease: "power2.inOut",
           duration: 0.50,
         },
@@ -210,8 +211,6 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // ---------------------------------------------------------------------
       // PHASE 3 (0.55 -> 0.75): Carousel Completely Established & Visible
       // ---------------------------------------------------------------------
-      // Between 0.55 and 0.75, the layout remains stable & fully established.
-      // (Scroll progress passes through 55% - 75% while hero remains pinned)
 
       // ---------------------------------------------------------------------
       // PHASE 4 (0.75 -> 0.90): Statistics Section Reveal
@@ -236,7 +235,6 @@ export function Hero({ onOpenDemo }: HeroProps) {
       // ---------------------------------------------------------------------
       // PHASE 5 (0.90 -> 1.00): Exit Hero / Complete Sequence & Unpin
       // ---------------------------------------------------------------------
-      // Hold completed state cleanly until 1.00 when ScrollTrigger unpins
       tl.to({}, { duration: 0.10 }, 0.90);
     }, containerRef);
 

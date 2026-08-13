@@ -14,6 +14,7 @@ import {
   User,
   Globe,
 } from "lucide-react";
+import { ProgressiveLogo } from "@/components/progressive-logo";
 
 export default function NewPostPage() {
   const router = useRouter();
@@ -105,12 +106,19 @@ export default function NewPostPage() {
       {/* Top Bar */}
       <header className="border-b border-[#27272A] bg-[#141414] sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link
-            href="/admin"
-            className="flex items-center gap-2 text-xs font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="group flex items-center gap-2">
+              <div className="relative w-7 h-7 rounded-full border border-[#27272A] group-hover:border-[#E2E8F0] transition-colors overflow-hidden shrink-0 shadow-md flex items-center justify-center bg-black">
+                <ProgressiveLogo />
+              </div>
+            </Link>
+            <Link
+              href="/admin"
+              className="flex items-center gap-2 text-xs font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+            </Link>
+          </div>
 
           <div className="flex items-center gap-3">
             <label className="flex items-center gap-2 text-xs text-[#FAFAFA] cursor-pointer bg-[#1C1C1C] border border-[#27272A] px-3 py-1.5 rounded-lg">

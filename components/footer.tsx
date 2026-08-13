@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Sparkles, Share2, Globe, Video, ExternalLink } from "lucide-react";
+import { ProgressiveLogo } from "@/components/progressive-logo";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -18,12 +19,7 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3 group cursor-pointer">
               <div className="relative w-9 h-9 rounded-full border border-[#27272A] group-hover:border-[#E2E8F0] transition-colors overflow-hidden shrink-0 shadow-md flex items-center justify-center bg-black">
-                <Image
-                  src="/IMG_3249.PNG"
-                  alt="MotionVox Logo"
-                  fill
-                  className="object-cover object-center filter brightness-110 group-hover:scale-110 transition-transform duration-300"
-                />
+                <ProgressiveLogo />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold tracking-tight text-[#FAFAFA] text-xl leading-none group-hover:text-[#FFFFFF] transition-colors">

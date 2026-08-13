@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 import { useDemoModal } from "@/components/providers/demo-provider";
 
+import { ProgressiveLogo } from "@/components/progressive-logo";
+
 interface NavbarProps {
   onOpenDemo?: () => void;
 }
@@ -73,13 +75,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           className="flex items-center gap-3 group cursor-pointer"
         >
           <div className="relative w-8 h-8 rounded-full border border-[#27272A] group-hover:border-[#E2E8F0] transition-colors overflow-hidden shrink-0 shadow-md flex items-center justify-center bg-black">
-            <Image
-              src="/IMG_3249.PNG"
-              alt="MotionVox Logo"
-              fill
-              className="object-cover object-center filter brightness-110 group-hover:scale-110 transition-transform duration-300"
-              priority
-            />
+            <ProgressiveLogo />
           </div>
           <div className="flex flex-col">
             <span className="font-bold tracking-tight text-[#FAFAFA] text-lg leading-none group-hover:text-[#FFFFFF] transition-colors">
