@@ -95,68 +95,63 @@ export function Hero({ onOpenDemo }: HeroProps) {
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-      const scrollEnd = isMobile ? "+=70%" : isTablet ? "+=110%" : "+=150%";
+      const scrollEnd = isMobile ? "+=75%" : isTablet ? "+=110%" : "+=150%";
 
       // Master scroll-driven timeline pinned to the viewport
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: scrollEnd, // Responsive scroll distance for mobile & tablet
+          end: scrollEnd,
           pin: true,
           pinSpacing: true,
-          anticipatePin: 1, // Eliminates pin jump on touch devices when scrolling up
+          anticipatePin: 1, // Eliminates mobile address bar pin jump
           scrub: isMobile ? 0.2 : 0.4,
           fastScrollEnd: true,
           preventOverlaps: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (self.progress > 0.15) {
-              setIsShrunk(true);
-            } else {
-              setIsShrunk(false);
-            }
+            setIsShrunk(self.progress > 0.15);
           },
         },
       });
 
-      // Target video card shrink dimensions based on device size
-      const targetWidth = isMobile ? "88vw" : isTablet ? "70vw" : "58vw";
-      const targetHeight = isMobile ? "36vh" : isTablet ? "46vh" : "54vh";
-      const sideCardXOffset = isMobile ? 15 : isTablet ? 50 : 120;
+      // 1. Text Overlay Fades Out & Moves Up
+      if (textContainerRef.current) {
+        tl.to(
+          textContainerRef.current,
+          {
+            opacity: 0,
+            y: -35,
+            scale: 0.96,
+            ease: "none",
+            duration: 0.25,
+          },
+          0
+        );
+      }
 
-      // ---------------------------------------------------------------------
-      // PHASE 1 (0.00 -> 0.25): Hero Starts Shrinking
-      // ---------------------------------------------------------------------
-      // 1a. Hero main text overlay dissolves out smoothly
-      tl.to(
-        textContainerRef.current,
-        {
-          opacity: 0,
-          y: -30,
-          scale: 0.97,
-          ease: "none",
-          duration: 0.25,
-        },
-        0
-      );
+      // 2. Video Card Container Scales Down GPU-wise
+      const targetScaleX = isMobile ? 0.90 : isTablet ? 0.76 : 0.62;
+      const targetScaleY = isMobile ? 0.44 : isTablet ? 0.54 : 0.58;
 
-      // 1b. Main hero video container scales down smoothly from 100vw/100vh to card dimensions
-      tl.to(
-        videoWrapperRef.current,
-        {
-          width: targetWidth,
-          height: targetHeight,
-          borderRadius: isMobile ? "20px" : "32px",
-          boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
-          borderColor: "rgba(39, 39, 42, 1)",
-          ease: "none",
-          duration: 0.50,
-        },
-        0
-      );
+      if (videoWrapperRef.current) {
+        tl.to(
+          videoWrapperRef.current,
+          {
+            scaleX: targetScaleX,
+            scaleY: targetScaleY,
+            borderRadius: isMobile ? "24px" : "36px",
+            borderColor: "rgba(39, 39, 42, 0.8)",
+            boxShadow: "0 30px 90px rgba(0, 0, 0, 0.95)",
+            ease: "none",
+            duration: 0.45,
+          },
+          0
+        );
+      }
 
-      // 1c. Inner card title overlay (for shrunk state) fades in on central video card
+      // 3. Shrunk Title Overlay inside Video Card
       if (shrunkOverlayRef.current) {
         tl.to(
           shrunkOverlayRef.current,
@@ -170,63 +165,58 @@ export function Hero({ onOpenDemo }: HeroProps) {
         );
       }
 
-      // ---------------------------------------------------------------------
-      // PHASE 2 (0.25 -> 0.55): Carousel Cards Reveal & Slide In
-      // ---------------------------------------------------------------------
-      // Left Card: PREVIOUS REEL
+      // 4. Side Carousel Cards Reveal
+      const sideCardOffset = isMobile ? 12 : isTablet ? 40 : 90;
+
       if (leftCardRef.current) {
-        tl.to(
+        tl.fromTo(
           leftCardRef.current,
+          { opacity: 0, x: -sideCardOffset, scale: 0.85 },
           {
             opacity: 1,
             x: 0,
             scale: 1,
             ease: "none",
             duration: 0.30,
+            immediateRender: false,
           },
           0.25
         );
       }
 
-      // Right Card: NEXT REEL
       if (rightCardRef.current) {
-        tl.to(
+        tl.fromTo(
           rightCardRef.current,
+          { opacity: 0, x: sideCardOffset, scale: 0.85 },
           {
             opacity: 1,
             x: 0,
             scale: 1,
             ease: "none",
             duration: 0.30,
+            immediateRender: false,
           },
           0.25
         );
       }
 
-      // ---------------------------------------------------------------------
-      // PHASE 3 (0.55 -> 0.75): Carousel Completely Established & Visible
-      // ---------------------------------------------------------------------
-
-      // ---------------------------------------------------------------------
-      // PHASE 4 (0.75 -> 0.90): Statistics Section Reveal
-      // ---------------------------------------------------------------------
+      // 5. Bottom Stats Strip Reveal
       if (statsRef.current) {
-        tl.to(
+        tl.fromTo(
           statsRef.current,
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
             ease: "none",
-            duration: 0.15,
+            duration: 0.20,
+            immediateRender: false,
           },
-          0.75
+          0.70
         );
       }
 
-      // ---------------------------------------------------------------------
-      // PHASE 5 (0.90 -> 1.00): Exit Hero / Complete Sequence & Unpin
-      // ---------------------------------------------------------------------
       tl.to({}, { duration: 0.10 }, 0.90);
     }, containerRef);
 
