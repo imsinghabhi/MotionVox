@@ -87,24 +87,24 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           </div>
         </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1 rounded-full bg-[#1C1C1C]/80 border border-[#27272A]">
+        {/* Desktop Nav Links (Visible on 1024px+ screens to prevent iPad Mini/Air squishing) */}
+        <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 px-3 py-1 rounded-full bg-[#1C1C1C]/80 border border-[#27272A]">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="px-3.5 py-1.5 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] rounded-full hover:bg-[#27272A] transition-all duration-200"
+              className="px-3 py-1.5 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] rounded-full hover:bg-[#27272A] transition-all duration-200"
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Action Button & Mobile Menu Toggle */}
-        <div className="flex items-center gap-3">
+        {/* Action Button & Mobile/Tablet Menu Toggle */}
+        <div className="flex items-center gap-2.5">
           <button
             onClick={handleOpenDemo}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-[#FAFAFA] hover:bg-[#FFFFFF] text-[#0A0A0A] font-semibold text-xs transition-all shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer group"
+            className="hidden lg:inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-[#FAFAFA] hover:bg-[#FFFFFF] text-[#0A0A0A] font-semibold text-xs transition-all shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] cursor-pointer group shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5 fill-[#0A0A0A]" />
             <span>Book a Demo</span>
@@ -113,7 +113,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] focus:outline-none"
+            className="lg:hidden p-2 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] focus:outline-none cursor-pointer shrink-0"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -121,7 +121,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile & Tablet Drawer (<1024px) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -129,7 +129,7 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="pointer-events-auto fixed inset-x-4 top-20 z-40 p-6 rounded-3xl bg-[#141414] border border-[#27272A] shadow-2xl flex flex-col gap-4 md:hidden"
+            className="pointer-events-auto fixed inset-x-4 top-20 z-40 p-6 rounded-3xl bg-[#141414] border border-[#27272A] shadow-2xl flex flex-col gap-4 lg:hidden"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
