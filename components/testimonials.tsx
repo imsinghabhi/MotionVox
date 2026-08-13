@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Testimonials() {
@@ -55,34 +55,35 @@ export function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#11100E]">
-      {/* Ambient background glow */}
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-[#C8A46B]/5 rounded-full blur-[150px] pointer-events-none" />
+    <section id="testimonials" className="relative py-32 px-4 sm:px-6 lg:px-12 bg-[#0A0A0A] border-t border-[#27272A] studio-noise-bg">
+      {/* Background glow */}
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-white/5 rounded-full blur-[160px] pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6 pb-8 border-b border-[#27272A]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181715] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
-              <Sparkles className="w-3.5 h-3.5" /> Client Proof
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#27272A] text-[11px] font-mono uppercase tracking-widest text-[#E2E8F0] mb-4">
+              <Sparkles className="w-3.5 h-3.5" /> Client Proof & Endorsements
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight">
+            <h2 className="text-4xl sm:text-6xl font-extrabold text-[#FAFAFA] tracking-tight leading-tight">
               Validated by Leaders, <br />
-              <span className="text-silver-gradient">Loved by Creators.</span>
+              <span className="text-silver-gradient font-light italic">Loved by Global Creators.</span>
             </h2>
           </div>
 
+          {/* Navigation Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={prevReview}
-              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B]/40 hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-colors"
+              className="p-4 rounded-full bg-[#141414] border border-[#27272A] hover:border-[#E2E8F0] hover:text-[#FFFFFF] text-[#FAFAFA] transition-all cursor-pointer shadow-lg"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextReview}
-              className="p-3.5 rounded-full bg-[#181715] border border-[#34312B]/40 hover:border-[#C8A46B]/40 text-[#F3F0E8] transition-colors"
+              className="p-4 rounded-full bg-[#141414] border border-[#27272A] hover:border-[#E2E8F0] hover:text-[#FFFFFF] text-[#FAFAFA] transition-all cursor-pointer shadow-lg"
               aria-label="Next Testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -90,44 +91,53 @@ export function Testimonials() {
           </div>
         </div>
 
-        {/* Featured Testimonial Card */}
-        <div className="relative rounded-3xl p-1 bg-[#201F1C] border border-[#34312B]/40 shadow-2xl overflow-hidden">
-          <div className="relative rounded-[22px] bg-[#181715] p-8 sm:p-12 border border-[#34312B]/40 overflow-hidden">
-            <Quote className="w-16 h-16 text-[#C8A46B]/15 absolute top-6 right-8 pointer-events-none" />
-
-            <div className="relative z-10 max-w-4xl">
-              <div className="flex items-center gap-1 text-[#C8A46B] mb-6">
-                {[...Array(reviews[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-[#C8A46B] text-[#C8A46B]" />
-                ))}
+        {/* Editorial Quote Showcase */}
+        <div className="relative py-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-8"
+            >
+              {/* Star Rating Badge Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#27272A]">
+                <div className="flex items-center gap-1 text-[#FAFAFA]">
+                  {[...Array(reviews[currentIndex].rating)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#FAFAFA] text-[#FAFAFA]" />
+                  ))}
+                </div>
+                <span className="text-[11px] font-mono font-bold text-[#FAFAFA] pl-1 border-l border-[#27272A]">
+                  5.0 VERIFIED RATING
+                </span>
               </div>
 
-              <motion.p
-                key={currentIndex}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-xl sm:text-3xl font-medium text-[#F3F0E8] leading-relaxed mb-8 text-balance"
-              >
+              <blockquote className="text-2xl sm:text-4xl lg:text-5xl font-light text-[#FAFAFA] leading-tight tracking-tight max-w-5xl">
                 &ldquo;{reviews[currentIndex].quote}&rdquo;
-              </motion.p>
+              </blockquote>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#34312B]/40">
+              <div className="pt-8 border-t border-[#27272A] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-lg font-bold text-[#F3F0E8]">{reviews[currentIndex].author}</h4>
-                  <p className="text-xs text-[#A8A39A]">
-                    {reviews[currentIndex].role} — <span className="text-[#C8A46B]">{reviews[currentIndex].company}</span>
+                  <h4 className="text-xl font-bold text-[#FAFAFA]">
+                    {reviews[currentIndex].author}
+                  </h4>
+                  <p className="text-xs font-mono text-[#A1A1AA] mt-1">
+                    {reviews[currentIndex].role} —{" "}
+                    <span className="text-[#E2E8F0]">{reviews[currentIndex].company}</span>
                   </p>
                 </div>
 
-                <div className="px-4 py-2 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/20 text-[#C8A46B] font-mono text-xs font-semibold w-fit">
-                  {reviews[currentIndex].metric}
+                <div className="px-5 py-2.5 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#FAFAFA] font-mono text-xs font-bold w-fit">
+                  RESULT: {reviews[currentIndex].metric}
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
+
 }

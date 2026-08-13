@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Plus, Minus } from "lucide-react";
+import { Sparkles, Plus, ArrowUpRight } from "lucide-react";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -24,9 +24,14 @@ export function FAQ() {
         "Yes! With a simple 5-minute video recording session, we create high-fidelity 4K digital avatars. Once trained, your team can generate unlimited videos in any language simply by inputting a text script.",
     },
     {
-      question: "What is the typical turnaround time for a media project?",
+      question: "Do you engineer full-fledged web applications, ERP software, and SaaS portals?",
       answer:
-        "Neural dubbing & video avatar renders are typically completed within 24 to 48 hours. Custom web development and end-to-end studio workflow automation take between 1 to 2 weeks.",
+        "Absolutely. MotionVox engineers end-to-end full-fledged web platforms, custom ERP systems, CRM portals, enterprise SaaS dashboards, and complex digital platforms using Next.js, Node.js, and real-time database architecture—combined with Awwwards-caliber motion design and integrated AI explainer avatars.",
+    },
+    {
+      question: "What is the typical turnaround time for a media or web project?",
+      answer:
+        "Neural dubbing & video avatar renders are typically completed within 24 to 48 hours. Custom web development, full-fledged ERP systems, and studio workflow automation take between 1 to 3 weeks.",
     },
     {
       question: "How do you protect executive voice rights, privacy, and proprietary media?",
@@ -45,39 +50,48 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#181715] border-t border-[#34312B]/40">
-      <div className="max-w-4xl mx-auto">
+    <section id="faq" className="relative py-32 px-4 sm:px-6 lg:px-12 bg-[#0A0A0A] border-t border-[#27272A] studio-noise-bg">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201F1C] border border-[#34312B]/40 text-xs font-semibold uppercase tracking-wider text-[#C8A46B] mb-4">
-            <Sparkles className="w-3.5 h-3.5" /> Got Questions?
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8 pb-8 border-b border-[#27272A]">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#27272A] text-[11px] font-mono uppercase tracking-widest text-[#E2E8F0] mb-4">
+              <Sparkles className="w-3.5 h-3.5" /> Studio Knowledge Base
+            </div>
+            <h2 className="text-4xl sm:text-6xl font-extrabold text-[#FAFAFA] tracking-tight leading-tight">
+              Frequently Asked <br />
+              <span className="text-silver-gradient font-light italic">Questions & Inquiries.</span>
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#F3F0E8] tracking-tight leading-tight mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-[#A8A39A] text-sm sm:text-base">
-            Everything you need to know about our dubbing, AI avatars, web engineering, and media workflows.
+          <p className="text-[#A1A1AA] max-w-sm text-sm leading-relaxed">
+            Everything you need to know about our dubbing workflows, AI avatars, security guarantees, and execution models.
           </p>
         </div>
 
-        {/* Accordion List */}
-        <div className="space-y-4">
+        {/* Clean Editorial Line Accordion List */}
+        <div className="divide-y divide-[#27272A] border-y border-[#27272A]">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
-                className="bg-[#201F1C] rounded-2xl border border-[#34312B]/40 overflow-hidden transition-colors shadow-md"
+                className="group py-8 transition-colors cursor-pointer"
+                onClick={() => toggleFAQ(idx)}
               >
-                <button
-                  onClick={() => toggleFAQ(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-semibold text-[#F3F0E8] text-base sm:text-lg hover:text-[#C8A46B] transition-colors focus:outline-none cursor-pointer"
-                >
-                  <span>{faq.question}</span>
-                  <div className="p-2 rounded-full bg-[#181715] text-[#C8A46B] border border-[#34312B]/40 shrink-0">
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                <div className="flex items-center justify-between gap-6 text-left">
+                  <div className="flex items-center gap-6 flex-1">
+                    <span className="font-mono text-xs text-[#A1A1AA]/60 font-bold">
+                      0{idx + 1}
+                    </span>
+                    <h3 className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors ${isOpen ? "text-[#E2E8F0]" : "text-[#FAFAFA] group-hover:text-[#FFFFFF]"}`}>
+                      {faq.question}
+                    </h3>
                   </div>
-                </button>
+
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isOpen ? "bg-[#FAFAFA] text-[#0A0A0A] rotate-45" : "bg-[#141414] text-[#A1A1AA] group-hover:text-[#FAFAFA]"}`}>
+                    <Plus className="w-5 h-5 transition-transform" />
+                  </div>
+                </div>
 
                 <AnimatePresence>
                   {isOpen && (
@@ -85,10 +99,10 @@ export function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 pt-2 text-sm text-[#A8A39A] leading-relaxed border-t border-[#34312B]/40">
+                      <div className="pt-6 pl-10 pr-6 text-sm sm:text-base text-[#A1A1AA] leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -101,4 +115,5 @@ export function FAQ() {
       </div>
     </section>
   );
+
 }

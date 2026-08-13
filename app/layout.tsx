@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
+import { DemoProvider } from "@/components/providers/demo-provider";
 import { MouseSpotlight } from "@/components/ui/mouse-spotlight";
 import { SEOSchema } from "@/components/seo-schema";
 
@@ -81,13 +82,15 @@ export default function RootLayout({
     >
       <body
         suppressHydrationWarning
-        className="min-h-full flex flex-col bg-[#11100E] text-[#F3F0E8] selection:bg-[#C8A46B] selection:text-[#11100E] bg-noise"
+        className="min-h-full flex flex-col bg-[#0A0A0A] text-[#FAFAFA] selection:bg-[#FAFAFA] selection:text-[#0A0A0A] bg-noise"
       >
         <SEOSchema />
-        <SmoothScrollProvider>
-          <MouseSpotlight />
-          <div className="flex-1 flex flex-col">{children}</div>
-        </SmoothScrollProvider>
+        <DemoProvider>
+          <SmoothScrollProvider>
+            <MouseSpotlight />
+            <div className="flex-1 flex flex-col">{children}</div>
+          </SmoothScrollProvider>
+        </DemoProvider>
       </body>
     </html>
   );

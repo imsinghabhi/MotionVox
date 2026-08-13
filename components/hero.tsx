@@ -267,29 +267,29 @@ export function Hero({ onOpenDemo }: HeroProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-[#11100E] z-10"
+      className="relative w-full bg-[#0A0A0A] z-10"
       style={{ height: "100vh" }}
     >
       {/* Viewport container fixed/pinned during scroll */}
       <div
         ref={viewportRef}
-        className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#11100E] transform-gpu"
+        className="sticky top-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#0A0A0A] transform-gpu"
       >
         {/* Background Radial Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C8A46B]/5 rounded-full blur-3xl pointer-events-none z-0 transform-gpu" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl pointer-events-none z-0 transform-gpu" />
 
         {/* 1. INITIAL HERO OVERLAY TEXT (Phase 1) */}
         <div
           ref={textContainerRef}
           className="absolute z-40 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] pointer-events-auto"
         >
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F3F0E8] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#FAFAFA] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
             Refined Media Solutions, <br className="hidden sm:inline" />
             <span className="text-silver-gradient">Crafted with Expertise.</span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-[#A8A39A] max-w-xl font-normal leading-relaxed mb-6 text-left drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-            MotionVox helps scaling businesses, SaaS pioneers, and creators expand globally using hyper-realistic AI video avatars, professional multi-language dubbing, and automated media pipelines.
+          <p className="text-sm sm:text-base md:text-lg text-[#A1A1AA] max-w-xl font-normal leading-relaxed mb-6 text-left drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            MotionVox builds full-fledged web applications, custom ERP systems, SaaS platforms, hyper-realistic AI video avatars, and automated multi-language dubbing pipelines for ambitious global brands.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3.5 w-full sm:w-auto relative z-50 pointer-events-auto">
@@ -298,7 +298,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
               onClick={() => {
                 onOpenDemo();
               }}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] shadow-lg transition-all"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 group cursor-pointer bg-[#FAFAFA] hover:bg-[#FFFFFF] text-[#0A0A0A] shadow-xl hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all"
             >
               <span>Book a Demo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -313,7 +313,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
                   el.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#34312B]/40 bg-[#201F1C] hover:bg-[#282622] hover:border-[#C8A46B]/30 text-[#F3F0E8] transition-all cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 border border-[#27272A] bg-[#1C1C1C] hover:bg-[#27272A] hover:border-[#E2E8F0]/40 text-[#FAFAFA] transition-all cursor-pointer"
             >
               <span>Explore Services</span>
             </a>
@@ -343,21 +343,20 @@ export function Hero({ onOpenDemo }: HeroProps) {
           />
 
           {/* Video Overlay Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/90 via-[#11100E]/30 to-[#11100E]/50 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/30 to-[#0A0A0A]/50 z-10 pointer-events-none" />
 
-    
           {/* Shrunk State Title Overlay inside Central Video Card */}
           <div
             ref={shrunkOverlayRef}
-            className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#11100E] via-[#11100E]/80 to-transparent pointer-events-none opacity-0"
+            className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent pointer-events-none opacity-0"
           >
-            <span className="px-3 py-1 rounded-full bg-[#C8A46B]/10 border border-[#C8A46B]/20 text-[#C8A46B] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
+            <span className="px-3 py-1 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#E2E8F0] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
               {reels[activeReelIndex].category}
             </span>
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#F3F0E8] tracking-tight drop-shadow-md">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#FAFAFA] tracking-tight drop-shadow-md">
               {reels[activeReelIndex].headline}
             </h2>
-            <p className="text-[11px] sm:text-xs md:text-sm text-[#A8A39A] mt-1 max-w-md">
+            <p className="text-[11px] sm:text-xs md:text-sm text-[#A1A1AA] mt-1 max-w-md">
               {reels[activeReelIndex].sub}
             </p>
           </div>
@@ -369,7 +368,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           <div
             ref={leftCardRef}
             onClick={handlePrevReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B]/40 bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
             {/* Background Video */}
             <video
@@ -382,25 +381,25 @@ export function Hero({ onOpenDemo }: HeroProps) {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/95 via-[#11100E]/60 to-[#11100E]/40 z-5" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
 
             <div className="relative z-10 flex items-center justify-between">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
                 {reels[prevIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B]/40 flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
                 <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
 
             <div className="relative z-10 text-left space-y-0.5 sm:space-y-1">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#A8A39A]/70 font-semibold block">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#A1A1AA]/70 font-semibold block">
                 PREVIOUS REEL
               </span>
-              <h4 className="text-xs sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+              <h4 className="text-xs sm:text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
                 {reels[prevIndex].headline}
               </h4>
-              <p className="text-[10px] sm:text-[11px] text-[#A8A39A] line-clamp-1 hidden sm:block drop-shadow">
+              <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] line-clamp-1 hidden sm:block drop-shadow">
                 {reels[prevIndex].sub}
               </p>
             </div>
@@ -410,7 +409,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           <div
             ref={rightCardRef}
             onClick={handleNextReel}
-            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#34312B]/40 bg-[#181715]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#C8A46B]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
+            className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
             {/* Background Video */}
             <video
@@ -423,25 +422,25 @@ export function Hero({ onOpenDemo }: HeroProps) {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#11100E]/95 via-[#11100E]/60 to-[#11100E]/40 z-5" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
 
             <div className="relative z-10 flex items-center justify-between">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold tracking-wider line-clamp-1">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold tracking-wider line-clamp-1">
                 {reels[nextIndex].category}
               </span>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#201F1C]/80 border border-[#34312B]/40 flex items-center justify-center text-[#C8A46B] group-hover:bg-[#C8A46B] group-hover:text-[#11100E] transition-colors shrink-0 backdrop-blur-sm">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#1C1C1C]/80 border border-[#27272A] flex items-center justify-center text-[#E2E8F0] group-hover:bg-[#FAFAFA] group-hover:text-[#0A0A0A] transition-colors shrink-0 backdrop-blur-sm">
                 <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
 
             <div className="relative z-10 text-right space-y-0.5 sm:space-y-1">
-              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#C8A46B] font-semibold block">
+              <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#E2E8F0] font-semibold block">
                 NEXT REEL
               </span>
-              <h4 className="text-xs sm:text-base font-bold text-[#F3F0E8] group-hover:text-[#C8A46B] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
+              <h4 className="text-xs sm:text-base font-bold text-[#FAFAFA] group-hover:text-[#FFFFFF] transition-colors line-clamp-1 sm:line-clamp-2 drop-shadow-md">
                 {reels[nextIndex].headline}
               </h4>
-              <p className="text-[10px] sm:text-[11px] text-[#A8A39A] line-clamp-1 hidden sm:block drop-shadow">
+              <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] line-clamp-1 hidden sm:block drop-shadow">
                 {reels[nextIndex].sub}
               </p>
             </div>
@@ -451,25 +450,28 @@ export function Hero({ onOpenDemo }: HeroProps) {
         {/* 4. BOTTOM FLOATING STATS STRIP (Phase 4 - Reveals after carousel) */}
         <div
           ref={statsRef}
-          className="absolute bottom-3 sm:bottom-6 inset-x-3 sm:inset-x-8 z-30 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 pointer-events-auto opacity-0"
+          className="absolute bottom-4 sm:bottom-8 inset-x-4 sm:inset-x-8 z-30 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 pointer-events-auto opacity-0"
         >
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-[#34312B]/40 flex flex-col items-center text-center bg-[#201F1C]/90 backdrop-blur-md hover:border-[#C8A46B]/30 transition-colors shadow-lg"
+              className="px-4 py-3 rounded-full border border-[#27272A] flex items-center justify-center gap-3 bg-[#141414]/95 backdrop-blur-xl hover:border-[#E2E8F0]/50 transition-all shadow-xl"
             >
-              <stat.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8A46B] mb-0.5 sm:mb-1" />
-              <span className="text-lg sm:text-2xl font-extrabold text-[#F3F0E8] tracking-tight">
-                {stat.value}
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-[#A8A39A] font-medium mt-0.5">
-                {stat.label}
-              </span>
+              <stat.icon className="w-4 h-4 text-[#E2E8F0] shrink-0" />
+              <div className="flex flex-col text-left">
+                <span className="text-sm sm:text-base font-extrabold text-[#FAFAFA] tracking-tight leading-none">
+                  {stat.value}
+                </span>
+                <span className="text-[9px] font-mono text-[#A1A1AA] uppercase tracking-wider mt-0.5">
+                  {stat.label}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </div>
   );
+
 }
 

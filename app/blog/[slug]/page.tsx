@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/blogs";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { BlogDemoCTA } from "@/components/blog-demo-cta";
 import { Clock, ArrowLeft, Calendar, Share2, Sparkles, Tag } from "lucide-react";
 
 export async function generateMetadata({
@@ -51,7 +52,7 @@ export default async function BlogPostDetailPage({
   }
 
   return (
-    <main className="relative flex flex-col flex-1 min-h-screen bg-[#11100E] text-[#F3F0E8] overflow-x-hidden">
+    <main className="relative flex flex-col flex-1 min-h-screen bg-[#0A0A0A] text-[#FAFAFA] overflow-x-hidden">
       <Navbar />
 
       {/* Header & Hero Image */}
@@ -60,7 +61,7 @@ export default async function BlogPostDetailPage({
         <div>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-xs font-medium text-[#A8A39A] hover:text-[#F3F0E8] transition-colors bg-[#181715] border border-[#34312B] px-3.5 py-1.5 rounded-full"
+            className="inline-flex items-center gap-2 text-xs font-medium text-[#A1A1AA] hover:text-[#FAFAFA] transition-colors bg-[#141414] border border-[#27272A] px-3.5 py-1.5 rounded-full"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to All Articles
           </Link>
@@ -72,43 +73,43 @@ export default async function BlogPostDetailPage({
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#C8A46B]/10 border border-[#C8A46B]/30 text-[#C8A46B]"
+                className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#1C1C1C] border border-[#27272A] text-[#E2E8F0]"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F3F0E8] leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#FAFAFA] leading-tight">
             {post.title}
           </h1>
 
-          <p className="text-lg text-[#A8A39A] font-light leading-relaxed">
+          <p className="text-lg text-[#A1A1AA] font-light leading-relaxed">
             {post.excerpt}
           </p>
 
           {/* Author & Meta Row */}
-          <div className="pt-4 border-t border-b border-[#34312B] py-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="pt-4 border-t border-b border-[#27272A] py-4 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img
                 src={post.author.avatar}
                 alt={post.author.name}
-                className="w-11 h-11 rounded-full object-cover border border-[#34312B] shadow-md"
+                className="w-11 h-11 rounded-full object-cover border border-[#27272A] shadow-md"
               />
               <div>
-                <p className="text-sm font-semibold text-[#F3F0E8]">{post.author.name}</p>
-                <p className="text-xs text-[#A8A39A]">{post.author.role}</p>
+                <p className="text-sm font-semibold text-[#FAFAFA]">{post.author.name}</p>
+                <p className="text-xs text-[#A1A1AA]">{post.author.role}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-xs text-[#A8A39A]">
+            <div className="flex items-center gap-4 text-xs text-[#A1A1AA]">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#C8A46B]" />
+                <Calendar className="w-3.5 h-3.5 text-[#E2E8F0]" />
                 {post.publishedAt}
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#C8A46B]" />
+                <Clock className="w-3.5 h-3.5 text-[#E2E8F0]" />
                 {post.readTime}
               </span>
             </div>
@@ -116,7 +117,7 @@ export default async function BlogPostDetailPage({
         </div>
 
         {/* Cover Image */}
-        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-[#34312B] shadow-2xl bg-[#181715]">
+        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-[#27272A] shadow-2xl bg-[#141414]">
           <img
             src={post.coverImage}
             alt={post.title}
@@ -125,13 +126,13 @@ export default async function BlogPostDetailPage({
         </div>
 
         {/* Article Body Content */}
-        <div className="prose prose-invert max-w-none space-y-6 text-[#A8A39A] leading-relaxed text-base">
+        <div className="prose prose-invert max-w-none space-y-6 text-[#A1A1AA] leading-relaxed text-base">
           {post.content.split("\n\n").map((paragraph, idx) => {
             if (paragraph.startsWith("## ")) {
               return (
                 <h2
                   key={idx}
-                  className="text-2xl sm:text-3xl font-bold text-[#F3F0E8] tracking-tight mt-10 mb-4 border-b border-[#34312B] pb-2"
+                  className="text-2xl sm:text-3xl font-bold text-[#FAFAFA] tracking-tight mt-10 mb-4 border-b border-[#27272A] pb-2"
                 >
                   {paragraph.replace("## ", "")}
                 </h2>
@@ -141,7 +142,7 @@ export default async function BlogPostDetailPage({
               return (
                 <h3
                   key={idx}
-                  className="text-xl font-semibold text-[#C8A46B] tracking-tight mt-8 mb-3"
+                  className="text-xl font-semibold text-[#E2E8F0] tracking-tight mt-8 mb-3"
                 >
                   {paragraph.replace("### ", "")}
                 </h3>
@@ -151,14 +152,14 @@ export default async function BlogPostDetailPage({
               return (
                 <blockquote
                   key={idx}
-                  className="my-6 border-l-4 border-[#C8A46B] bg-[#181715] p-6 rounded-r-2xl italic text-[#F3F0E8] text-lg font-serif"
+                  className="my-6 border-l-4 border-[#E2E8F0] bg-[#141414] p-6 rounded-r-2xl italic text-[#FAFAFA] text-lg font-serif border border-r-0 border-t-0 border-b-0 border-[#27272A]"
                 >
                   {paragraph.replace("> ", "")}
                 </blockquote>
               );
             }
             return (
-              <p key={idx} className="text-[#A8A39A] leading-relaxed">
+              <p key={idx} className="text-[#A1A1AA] leading-relaxed">
                 {paragraph}
               </p>
             );
@@ -166,30 +167,13 @@ export default async function BlogPostDetailPage({
         </div>
 
         {/* Article Footer & CTA */}
-        <div className="mt-16 pt-10 border-t border-[#34312B] space-y-8">
-          <div className="p-8 rounded-3xl bg-[#181715] border border-[#34312B] text-center space-y-4 shadow-xl">
-            <div className="inline-flex items-center gap-1.5 text-xs text-[#C8A46B] font-mono">
-              <Sparkles className="w-4 h-4" /> Ready to Automate Your Video Production?
-            </div>
-            <h3 className="text-2xl font-bold text-[#F3F0E8]">
-              Scale Your Media Production with MotionVox
-            </h3>
-            <p className="text-sm text-[#A8A39A] max-w-xl mx-auto">
-              Our neural dubbing and photorealistic video avatar workflows help industry leaders produce Studio-grade media content in any language.
-            </p>
-            <div>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#C8A46B] hover:bg-[#D8B982] text-[#11100E] font-medium text-sm transition-all hover:scale-105 shadow-md"
-              >
-                Book a Demo Call
-              </Link>
-            </div>
-          </div>
+        <div className="mt-16 pt-10 border-t border-[#27272A] space-y-8">
+          <BlogDemoCTA />
         </div>
       </article>
 
       <Footer />
     </main>
   );
+
 }
