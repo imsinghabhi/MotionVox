@@ -97,6 +97,16 @@ export function Hero({ onOpenDemo }: HeroProps) {
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
       const scrollEnd = isMobile ? "+=75%" : isTablet ? "+=110%" : "+=150%";
 
+      const sideCardOffset = isMobile ? 12 : isTablet ? 40 : 90;
+
+      // Register clean initial states for forward & reverse scrub
+      if (textContainerRef.current) gsap.set(textContainerRef.current, { opacity: 1, y: 0, scale: 1 });
+      if (videoWrapperRef.current) gsap.set(videoWrapperRef.current, { scaleX: 1, scaleY: 1 });
+      if (shrunkOverlayRef.current) gsap.set(shrunkOverlayRef.current, { opacity: 0, y: 20 });
+      if (leftCardRef.current) gsap.set(leftCardRef.current, { opacity: 0, x: -sideCardOffset, scale: 0.85 });
+      if (rightCardRef.current) gsap.set(rightCardRef.current, { opacity: 0, x: sideCardOffset, scale: 0.85 });
+      if (statsRef.current) gsap.set(statsRef.current, { opacity: 0, y: 30, scale: 0.95 });
+
       // Master scroll-driven timeline pinned to the viewport
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -105,7 +115,7 @@ export function Hero({ onOpenDemo }: HeroProps) {
           end: scrollEnd,
           pin: true,
           pinSpacing: true,
-          anticipatePin: 1, // Eliminates mobile address bar pin jump
+          anticipatePin: 1,
           scrub: isMobile ? 0.2 : 0.4,
           fastScrollEnd: true,
           preventOverlaps: true,
@@ -166,35 +176,29 @@ export function Hero({ onOpenDemo }: HeroProps) {
       }
 
       // 4. Side Carousel Cards Reveal
-      const sideCardOffset = isMobile ? 12 : isTablet ? 40 : 90;
-
       if (leftCardRef.current) {
-        tl.fromTo(
+        tl.to(
           leftCardRef.current,
-          { opacity: 0, x: -sideCardOffset, scale: 0.85 },
           {
             opacity: 1,
             x: 0,
             scale: 1,
             ease: "none",
             duration: 0.30,
-            immediateRender: false,
           },
           0.25
         );
       }
 
       if (rightCardRef.current) {
-        tl.fromTo(
+        tl.to(
           rightCardRef.current,
-          { opacity: 0, x: sideCardOffset, scale: 0.85 },
           {
             opacity: 1,
             x: 0,
             scale: 1,
             ease: "none",
             duration: 0.30,
-            immediateRender: false,
           },
           0.25
         );
@@ -202,16 +206,14 @@ export function Hero({ onOpenDemo }: HeroProps) {
 
       // 5. Bottom Stats Strip Reveal
       if (statsRef.current) {
-        tl.fromTo(
+        tl.to(
           statsRef.current,
-          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
             ease: "none",
             duration: 0.20,
-            immediateRender: false,
           },
           0.70
         );
@@ -350,15 +352,10 @@ export function Hero({ onOpenDemo }: HeroProps) {
             onClick={handlePrevReel}
             className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
-            {/* Background Video */}
-            <video
-              src={videoAsset}
-              poster={posterAsset}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
+            {/* Background Image Thumbnail (Optimized GPU render) */}
+            <img
+              src={posterAsset}
+              alt="Previous Reel Thumbnail"
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
@@ -391,15 +388,10 @@ export function Hero({ onOpenDemo }: HeroProps) {
             onClick={handleNextReel}
             className="relative w-28 sm:w-52 md:w-64 lg:w-76 h-40 sm:h-64 md:h-72 lg:h-80 rounded-2xl sm:rounded-3xl overflow-hidden border border-[#27272A] bg-[#141414]/90 backdrop-blur-md shadow-2xl pointer-events-auto cursor-pointer group hover:border-[#E2E8F0]/40 transition-all hover:scale-105 flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-0"
           >
-            {/* Background Video */}
-            <video
-              src={videoAsset}
-              poster={posterAsset}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
+            {/* Background Image Thumbnail (Optimized GPU render) */}
+            <img
+              src={posterAsset}
+              alt="Next Reel Thumbnail"
               className="absolute inset-0 w-full h-full object-cover filter brightness-[0.7] contrast-110 z-0 group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-[#0A0A0A]/40 z-5" />
