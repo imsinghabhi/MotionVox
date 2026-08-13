@@ -263,7 +263,9 @@ export function Hero({ onOpenDemo }: HeroProps) {
         {/* 1. INITIAL HERO OVERLAY TEXT (Phase 1) */}
         <div
           ref={textContainerRef}
-          className="absolute z-40 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] pointer-events-auto"
+          className={`absolute z-30 max-w-6xl w-full px-6 sm:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-24 text-left flex flex-col items-start will-change-[transform,opacity] ${
+            isShrunk ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#FAFAFA] leading-[1.08] mb-4 max-w-3xl text-left drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
             Refined Media Solutions, <br className="hidden sm:inline" />
@@ -330,22 +332,73 @@ export function Hero({ onOpenDemo }: HeroProps) {
           {/* Shrunk State Title Overlay inside Central Video Card */}
           <div
             ref={shrunkOverlayRef}
-            className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-20 flex flex-col items-center text-center bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent pointer-events-none opacity-0"
+            className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 z-30 flex flex-col items-center text-center bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent pointer-events-auto opacity-0"
           >
-            <span className="px-3 py-1 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#E2E8F0] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
-              {reels[activeReelIndex].category}
-            </span>
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#FAFAFA] tracking-tight drop-shadow-md">
-              {reels[activeReelIndex].headline}
-            </h2>
-            <p className="text-[11px] sm:text-xs md:text-sm text-[#A1A1AA] mt-1 max-w-md">
-              {reels[activeReelIndex].sub}
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeReelIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col items-center"
+              >
+                <span className="px-3 py-1 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#E2E8F0] text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider mb-1.5 sm:mb-2">
+                  {reels[activeReelIndex].category}
+                </span>
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#FAFAFA] tracking-tight drop-shadow-md">
+                  {reels[activeReelIndex].headline}
+                </h2>
+                <p className="text-[11px] sm:text-xs md:text-sm text-[#A1A1AA] mt-1 max-w-md">
+                  {reels[activeReelIndex].sub}
+                </p>
+
+                {/* Reel Navigation Dots & Controls */}
+                <div className="flex items-center gap-3 mt-3">
+                  <button
+                    type="button"
+                    onClick={handlePrevReel}
+                    className="p-1.5 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#FAFAFA] hover:bg-[#FAFAFA] hover:text-[#0A0A0A] transition-colors cursor-pointer"
+                    aria-label="Previous Reel"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    {reels.map((_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveReelIndex(idx);
+                        }}
+                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                          idx === activeReelIndex
+                            ? "w-6 bg-[#FAFAFA]"
+                            : "w-1.5 bg-[#27272A] hover:bg-[#A1A1AA]"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleNextReel}
+                    className="p-1.5 rounded-full bg-[#1C1C1C] border border-[#27272A] text-[#FAFAFA] hover:bg-[#FAFAFA] hover:text-[#0A0A0A] transition-colors cursor-pointer"
+                    aria-label="Next Reel"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* 3. CAROUSEL SIDE CARDS (Phase 2 & 3 - Slide & Fade In) */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-between px-2 sm:px-6 md:px-12 pointer-events-none w-full max-w-7xl mx-auto">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-50 flex items-center justify-between px-2 sm:px-6 md:px-12 pointer-events-none w-full max-w-7xl mx-auto">
           {/* Left Card: PREVIOUS REEL */}
           <div
             ref={leftCardRef}
